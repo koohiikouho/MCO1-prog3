@@ -11,7 +11,7 @@ public class HRSYS{
 
         
 
-        System.out.println(  hotelsys.hotels.get(0).getName() );
+        System.out.println(  hotelsys.hotels.get(0).rooms.get(0).getRoomFloor() + "-" + hotelsys.hotels.get(0).rooms.get(0).getRoomNumber());
         
     }
 
