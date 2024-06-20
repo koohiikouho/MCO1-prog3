@@ -12,8 +12,8 @@ public class Hotel {
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter hotel name: ");
         this.name = scan.nextLine();
-        System.out.print("Enter Room");
-        
+        System.out.print("How many rooms?");
+        this.name = scan.nextLine();
 
 
         scan.close();
