@@ -86,7 +86,7 @@ public class ViewHotel {
                     roomInfo(scan, hotels);
                     break;
                 case 3:
-                    reservationInfo(scan, hotels);
+                    reservationInfo(scan, hotels.getReservations());
                     break;
             }
         } catch (Exception e) { // if input is outside 1-3
@@ -223,28 +223,28 @@ public class ViewHotel {
      * @param scan   scanner object
      * @param hotels hotel to pull reservations from
      */
-    private void reservationInfo(Scanner scan, Hotel hotels) {
+    private void reservationInfo(Scanner scan, ArrayList<Reservation> reservations) {
         Character input = ' ';
         Integer i = 0;
         try {
             do {
                 System.out.println(
                         "Guest Name: " +
-                                hotels.getReservations().get(i).getGuestName().getFirstName()
+                                reservations.get(i).getGuestName().getFirstName()
                                 + " " +
-                                hotels.getReservations().get(i).getGuestName().getLastName());
+                                reservations.get(i).getGuestName().getLastName());
                 System.out.println("Room: " +
-                        hotels.getReservations().get(i).getRoom().getRoomFloor()
+                        reservations.get(i).getRoom().getRoomFloor()
                         + '-' +
-                        hotels.getReservations().get(i).getRoom().getRoomNumber());
-                System.out.println("Check In Date: " + toDateString(hotels.getReservations().get(i),
+                        reservations.get(i).getRoom().getRoomNumber());
+                System.out.println("Check In Date: " + toDateString(reservations.get(i),
                         true));
-                System.out.println("Check Out Date: " + toDateString(hotels.getReservations().get(i),
+                System.out.println("Check Out Date: " + toDateString(reservations.get(i),
                         false));
 
                 input = Character.toUpperCase(scan.nextLine().charAt(0));
                 System.out.println("Enter '.' for next, ',' for back: ");
-                if (input == '.' && i < hotels.getReservations().size())
+                if (input == '.' && i < reservations.size())
                     i++;
                 else if (input == ',' && i > 0) {
                     i--;
