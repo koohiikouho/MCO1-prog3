@@ -42,6 +42,29 @@ public class Hotel {
 
     }
 
+    /**
+     * returnIndex is a method that returns the index of a room and a floor in an
+     * array list, used for transaction to room referencing
+     * 
+     * @param roomFloor  roomFloor key
+     * @param roomNumber roomNumber key
+     * @return returns index of the room and floor
+     */
+    public Integer returnIndex(Integer roomFloor, Integer roomNumber) {
+        Integer i, index = 0;
+        try {
+            for (i = 0; i < getRooms().size(); ++i) {
+                if (getRooms().get(i).getRoomFloor() == roomFloor && getRooms().get(i).getRoomNumber() == roomNumber)
+                    index = i;
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error, index not found!");
+            index = -1;
+        }
+        return index;
+    }
+
     private void generateEarnings() {
         this.earningsEstimate = BigDecimal.valueOf(0);
         for (int i = 0; i < reservations.size(); ++i) {

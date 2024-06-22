@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -7,6 +8,19 @@ public class Reservation {
     private Date checkOutDate; // these Date classes are for view hotel
     private Room room;
     private ArrayList<Transaction> transaction = new ArrayList<Transaction>();
+
+    /**
+     * getTransactionTotal is a method that returns a BigDecimal value with all the
+     * transactions
+     * 
+     * @return returns the total cost of all transactions in a reservation
+     */
+    public BigDecimal getTransactionTotal() {
+        BigDecimal total = BigDecimal.valueOf(0);
+        for (int i = 0; i < transaction.size(); ++i)
+            total.add(transaction.get(i).getAmount());
+        return total;
+    }
 
     public Name getGuestName() {
         return guestName;

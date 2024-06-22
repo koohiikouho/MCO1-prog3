@@ -7,6 +7,9 @@ public class Room {
     private BigDecimal basePrice;
     private Boolean isReserved;
 
+    /**
+     * Room constructor used for manually inputting a room
+     */
     public Room() {
         Scanner scan = new Scanner(System.in);
 
@@ -22,6 +25,12 @@ public class Room {
         this.isReserved = false;
     }
 
+    /**
+     * Room constructor with floor and number, used for automated room creation
+     * 
+     * @param floor  floor of a room
+     * @param number number of a room within a floor
+     */
     public Room(Integer floor, Integer number) {
         this.roomFloor = floor;
         this.roomNumber = number;
