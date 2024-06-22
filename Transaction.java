@@ -1,20 +1,26 @@
-public class Transaction {
- private Float amount;
- private String description;
+import java.math.BigDecimal;
 
-    public Transaction(Float amount, String description){
+public class Transaction {
+    private BigDecimal amount;
+    private String description;
+
+    public Transaction(BigDecimal amount, String description) {
         this.amount = amount;
         this.description = description;
     }
-    public Float getAmount() {
+
+    public BigDecimal getAmount() {
         return amount;
     }
-    public void setAmount(Float amount) {
+
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }

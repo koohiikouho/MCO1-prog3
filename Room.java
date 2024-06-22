@@ -7,7 +7,7 @@ public class Room {
     private BigDecimal basePrice;
     private Boolean isReserved;
 
-    public Room(){
+    public Room() {
         Scanner scan = new Scanner(System.in);
 
         // System.out.println("Do you want to enter rooms manually?");
@@ -22,8 +22,8 @@ public class Room {
         this.isReserved = false;
     }
 
-    public Room(Integer floor, Integer number){
-        this.roomFloor = number;
+    public Room(Integer floor, Integer number) {
+        this.roomFloor = floor;
         this.roomNumber = number;
         this.isReserved = false;
         basePrice = BigDecimal.valueOf(1299.00);
@@ -60,7 +60,5 @@ public class Room {
     public void setBasePrice(BigDecimal basePrice) {
         this.basePrice = basePrice;
     }
-
-
 
 }

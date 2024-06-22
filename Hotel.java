@@ -9,57 +9,84 @@ public class Hotel {
     private BigDecimal earningsEstimate;
 
     /**
-     * constructor for the Hotel class, includes automated or manual room number adding
+     * constructor for the Hotel class, includes automated or manual room number
+     * adding
      */
-    public Hotel(){
-        Scanner scan = new Scanner(System.in);
+    public Hotel(Scanner scan) {
+
+        // variable declarations
+        Integer roomPFloor = 0;
+        Integer floors = 0;
+        Integer count = 0;
+
         System.out.print("Enter hotel name: ");
         this.name = scan.nextLine();
+        // do while loop will run until number of rooms are below 50
+        do {
+            // if(select != y || select != n){
+            if (count != 0) {
+                System.out.println("Only 50 rooms are allowed in the system!");
+            }
+            System.out.print("\nHow many floors?: ");
+            floors = Integer.parseInt(scan.nextLine());
+            System.out.print("\nHow many rooms per floor?: ");
+            roomPFloor = Integer.parseInt(scan.nextLine());
+            count++;
+        } while (roomPFloor * floors > 50);
 
-
-        System.out.print("\nHow many floors?: ");
-        Integer floors = Integer.parseInt(scan.nextLine());
-        System.out.print("\nHow many rooms per floor?: ");
-        Integer roomPFloor = Integer.parseInt(scan.nextLine());
-
-        for(int i = 0; i < floors; ++i){
-            for(int j = 0; j < roomPFloor; ++j)
-                rooms.add( new Room(i + 1, j + 1) );
+        for (int i = 0; i < floors.intValue(); ++i) {
+            for (int j = 0; j < roomPFloor.intValue(); ++j) {
+                rooms.add(new Room((i + 1), (j + 1)));
+            }
         }
 
-        
-
-        scan.close();
     }
+
+    private void generateEarnings() {
+        this.earningsEstimate = BigDecimal.valueOf(0);
+        for (int i = 0; i < reservations.size(); ++i) {
+            for (int j = 0; j < reservations.get(i).getTransaction().size(); ++j)
+                earningsEstimate.add(reservations.get(i).getTransaction().get(j).getAmount());
+        }
+    }
+
     /**
      * gets hotel name
+     * 
      * @return returns the name of the hotel
      */
     public String getName() {
         return name;
     }
+
     /**
      * sets hotel name
      */
     public void setName(String name) {
         this.name = name;
     }
+
     /**
      * Returns all the rooms in arraylist format
+     * 
      * @return returns room arraylist
      */
     public ArrayList<Room> getRooms() {
         return rooms;
     }
+
     /**
      * Sets a room in array list format
+     * 
      * @param rooms sets a room
      */
     public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;
     }
+
     /**
      * Gets all the resevations
+     * 
      * @return returns reservations in array list format
      */
     public ArrayList<Reservation> getReservations() {
@@ -68,25 +95,30 @@ public class Hotel {
 
     /**
      * Sets reservations
+     * 
      * @param reservations reservation setter in array list format
      */
     public void setReservations(ArrayList<Reservation> reservations) {
         this.reservations = reservations;
     }
+
     /**
      * gets the earnings estimate
+     * 
      * @return returns earnings estimate in BigDecimal format
      */
     public BigDecimal getEarningsEstimate() {
+        generateEarnings();
         return earningsEstimate;
     }
+
     /**
      * sets the earnings estimate
+     * 
      * @param earningsEstimate ths is in BigDecimal format
      */
     public void setEarningsEstimate(BigDecimal earningsEstimate) {
         this.earningsEstimate = earningsEstimate;
     }
 
-    
 }
