@@ -9,7 +9,9 @@ public class HRSYS {
         ViewHotel hotelView = new ViewHotel();
         Integer choice = 0;
         Scanner scan = new Scanner(System.in);
-
+        
+        ManageHotel manHotel = new ManageHotel();
+        
         do {
             System.out.println("Enter option:");
             System.out.println("[1] Create Hotel\n[2] View Hotel\n[3] Manage Hotel\n[4] Simulate Booking");
@@ -24,9 +26,9 @@ public class HRSYS {
                     else {
                         hotelView.viewHotel(scan, hotelsys.hotels);
                     }
-
                     break;
                 case 3:
+                	manHotel.optionSel(hotelsys.hotels);
                     break;
                 case 4:
                     break;
