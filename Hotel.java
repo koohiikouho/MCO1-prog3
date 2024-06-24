@@ -11,6 +11,8 @@ public class Hotel {
     /**
      * constructor for the Hotel class, includes automated or manual room number
      * adding
+     * 
+     * @param scan scanner variable
      */
     public Hotel(Scanner scan) {
 
