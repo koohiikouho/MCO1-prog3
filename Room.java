@@ -6,8 +6,7 @@ public class Room {
     private Integer roomFloor;
     private Integer roomNumber;
     private BigDecimal basePrice;
-    private Boolean isReserved;
-
+    // private Boolean isReserved;
     private Date checkInDate;
     private Date checkOutDate;
 
@@ -26,7 +25,7 @@ public class Room {
         scan.close();
 
         basePrice = BigDecimal.valueOf(1299.00);
-        this.isReserved = false;
+        // this.isReserved = false;
     }
 
     /**
@@ -38,7 +37,7 @@ public class Room {
     public Room(Integer floor, Integer number) {
         this.roomFloor = floor;
         this.roomNumber = number;
-        this.isReserved = false;
+        // this.isReserved = false;
         basePrice = BigDecimal.valueOf(1299.00);
     }
 
@@ -54,13 +53,13 @@ public class Room {
         this.roomNumber = roomNumber;
     }
 
-    public Boolean getIsReserved() {
-        return isReserved;
-    }
+    // public Boolean getIsReserved() {
+    // return isReserved;
+    // }
 
-    public void setIsReserved(Boolean isReserved) {
-        this.isReserved = isReserved;
-    }
+    // public void setIsReserved(Boolean isReserved) {
+    // this.isReserved = isReserved;
+    // }
 
     public Integer getRoomNumber() {
         return roomNumber;
