@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class SimulateBooking {
@@ -6,7 +7,7 @@ public class SimulateBooking {
 	public void SimBooking(ArrayList<Hotel> hotels) 
 	{
 		try (Scanner scan = new Scanner(System.in)) {
-			int i, hotelNum, roomNum, day, month, year, hour, min;
+			int i, hotelNum, roomNum, day, month, year, hour, min, reserveInd = -1;
 			String meridiem;
 					
 			if(hotels.size() != 0)
@@ -18,20 +19,19 @@ public class SimulateBooking {
 			    System.out.println("Select the hotel number: ");
 			    hotelNum = Integer.parseInt(scan.nextLine()) - 1;
 			    
-			    for (i = 0; i < hotels.get(hotelNum).rooms.size(); ++i)
-				{
-					System.out.println("[" + (i + 1) + "] " + hotels.get(hotelNum).rooms.get(i).getRoomFloor() + "-" + hotels.get(hotelNum).rooms.get(i).getRoomNumber());
-				}
 			    System.out.println("Select your room number:");
 			    roomNum = Integer.parseInt(scan.nextLine()) - 1;
 			    
-			    if(hotels.get(hotelNum).rooms.get(roomNum).getIsReserved() == true)
+			    reserveInd = findReservation(hotels.get(hotelNum).rooms.get(roomNum), hotels, hotelNum);
+			    
+			    if(reserveInd != -1)
 			    {
-			    	System.out.println("Sorry this room is reserved until " + hotels.get(hotelNum).rooms.get(roomNum).getCheckOutDate().getDay() + "-" + Integer.parseInt(scan.nextLine()) + "-" + hotels.get(hotelNum).rooms.get(roomNum).getCheckOutTime().getHour() + ":" + hotels.get(hotelNum).rooms.get(roomNum).getCheckOutTime().getMinute() + " " + hotels.get(hotelNum).rooms.get(roomNum).getCheckOutTime().getMeridiem());
+			    	System.out.println("Sorry this room is reserved until " + hotels.get(hotelNum).getReservations().get(reserveInd).getCheckOutDate().getDay() + "-" + hotels.get(hotelNum).getReservations().get(reserveInd).getCheckOutDate().getMonth() + "-" + hotels.get(hotelNum).getReservations().get(reserveInd).getCheckOutDate().getYear());
 			    }
 			    else
 			    {
 //	        	CheckIn
+			    	System.out.println("Ok no reservations yet\n");
 			    	System.out.println("What month is the Check in?");
 			    	month = Integer.parseInt(scan.nextLine());
 			    	
@@ -41,18 +41,13 @@ public class SimulateBooking {
 			    	System.out.println("What Year is the Check in?");
 			    	year = Integer.parseInt(scan.nextLine());
 			    	
-			    	hotels.get(hotelNum).rooms.get(roomNum).setCheckInDate(new Date(day, month, year));
-			    	
 			    	System.out.println("Hour?");
 			    	hour = Integer.parseInt(scan.nextLine());
 			    	
 			    	System.out.println("Minute?");
 			    	min = Integer.parseInt(scan.nextLine());
 			    	
-			    	System.out.println("AM or PM?");
-			    	meridiem = scan.nextLine();
-			    	
-			    	hotels.get(hotelNum).rooms.get(roomNum).setCheckInTime(new Time(hour, min, meridiem));
+			    	hotels.get(hotelNum).rooms.get(roomNum).setCheckInDate(new Date(year, month, day, hour, min));
 			    	
 //	        	CheckOut
 			    	System.out.println("What month is the Check Out?");
@@ -64,18 +59,13 @@ public class SimulateBooking {
 			    	System.out.println("What Year is the Check Out?");
 			    	year = Integer.parseInt(scan.nextLine());
 			    	
-			    	hotels.get(hotelNum).rooms.get(roomNum).setCheckOutDate(new Date(day, month, year));
-			    	
 			    	System.out.println("Hour?");
 			    	hour = Integer.parseInt(scan.nextLine());
 			    	
 			    	System.out.println("Minute?");
 			    	min = Integer.parseInt(scan.nextLine());
 			    	
-			    	System.out.println("AM or PM?");
-			    	meridiem = scan.nextLine();
-			    	
-			    	hotels.get(hotelNum).rooms.get(roomNum).setCheckOutTime(new Time(hour, min, meridiem));
+			    	hotels.get(hotelNum).rooms.get(roomNum).setCheckOutDate(new Date(year, month, day, hour, min));
 			    }
 			}
 		} catch (NumberFormatException e) {
@@ -83,4 +73,16 @@ public class SimulateBooking {
 			e.printStackTrace();
 		}
 	}
+	
+	public int findReservation(Room room, ArrayList<Hotel> hotels, int hotelNum) {
+    	int i, roomNum = -1;
+    	
+    	for(i = 0; i < hotels.get(hotelNum).getReservations().size(); ++i)
+		{
+			if (hotels.get(hotelNum).getReservations().get(i).getRoom().getRoomFloor() == room.getRoomFloor() && hotels.get(hotelNum).getReservations().get(i).getRoom().getRoomNumber() == room.getRoomNumber())
+				roomNum = i;
+		}
+    	
+    	return roomNum;
+ }
 }
