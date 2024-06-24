@@ -67,6 +67,10 @@ public class Hotel {
         return index;
     }
 
+    /**
+     * generateEarnings generates the earnings of a hotel by looking through every
+     * transaction the hotel has made
+     */
     private void generateEarnings() {
         this.earningsEstimate = BigDecimal.valueOf(0);
         for (int i = 0; i < reservations.size(); ++i) {

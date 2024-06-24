@@ -67,14 +67,14 @@ public class ManageHotel {
 	}
 
 	public void addRooms(Scanner scan, ArrayList<Hotel> hotels, int hotelNum) {
-		int numFloor, numRoom;
+		Integer numFloor, numRoom;
 
 		if (hotelNum >= 0) {
 			System.out.println("Enter FloorNumber");
-			numFloor = scan.nextInt();
+			numFloor = Integer.parseInt(scan.nextLine());
 
 			System.out.println("Enter New Room Number");
-			numRoom = scan.nextInt();
+			numRoom = Integer.parseInt(scan.nextLine());
 
 			hotels.get(hotelNum).rooms.add(new Room(numFloor, numRoom));
 		}
@@ -89,12 +89,14 @@ public class ManageHotel {
 			}
 			System.out.println("Please select a room to be removed");
 			room = Integer.parseInt(scan.nextLine());
-			
-			for(i = 0; i < hotels.get(hotelNum).getReservations().size(); ++i)
-			{
-				if (hotels.get(hotelNum).getReservations().get(i).getRoom().getRoomFloor() == hotels.get(hotelNum).rooms.get(room).getRoomFloor() && hotels.get(hotelNum).getReservations().get(i).getRoom().getRoomNumber() == hotels.get(hotelNum).rooms.get(room).getRoomNumber())
+
+			for (i = 0; i < hotels.get(hotelNum).getReservations().size(); ++i) {
+				if (hotels.get(hotelNum).getReservations().get(i).getRoom().getRoomFloor() == hotels.get(hotelNum).rooms
+						.get(room).getRoomFloor()
+						&& hotels.get(hotelNum).getReservations().get(i).getRoom()
+								.getRoomNumber() == hotels.get(hotelNum).rooms.get(room).getRoomNumber())
 					System.out.println("Room is booked cannot remove room");
-				else 
+				else
 					hotels.get(hotelNum).rooms.remove(room);
 			}
 		}
@@ -128,10 +130,12 @@ public class ManageHotel {
 			}
 			System.out.println("Please select a room");
 			room = Integer.parseInt(scan.nextLine());
-			
-			for(i = 0; i < hotels.get(hotelNum).getReservations().size(); ++i)
-			{
-				if (hotels.get(hotelNum).getReservations().get(i).getRoom().getRoomFloor() == hotels.get(hotelNum).rooms.get(room - 1).getRoomFloor() && hotels.get(hotelNum).getReservations().get(i).getRoom().getRoomNumber() == hotels.get(hotelNum).rooms.get(room - 1).getRoomNumber())
+
+			for (i = 0; i < hotels.get(hotelNum).getReservations().size(); ++i) {
+				if (hotels.get(hotelNum).getReservations().get(i).getRoom().getRoomFloor() == hotels.get(hotelNum).rooms
+						.get(room - 1).getRoomFloor()
+						&& hotels.get(hotelNum).getReservations().get(i).getRoom()
+								.getRoomNumber() == hotels.get(hotelNum).rooms.get(room - 1).getRoomNumber())
 					hotels.get(hotelNum).getReservations().remove(i);
 			}
 		}
@@ -142,16 +146,16 @@ public class ManageHotel {
 			hotels.remove(hotelNum);
 	}
 
-	 public int findReservation(Room room, ArrayList<Hotel> hotels, int hotelNum) {
-	    	int i, roomNum = -1;
-	    	
-	    	for(i = 0; i < hotels.get(hotelNum).getReservations().size(); ++i)
-			{
-				if (hotels.get(hotelNum).getReservations().get(i).getRoom().getRoomFloor() == room.getRoomFloor() && hotels.get(hotelNum).getReservations().get(i).getRoom().getRoomNumber() == room.getRoomNumber())
-					roomNum = i;
-			}
-	    	
-	    	return roomNum;
-	 }
-	
+	public int findReservation(Room room, ArrayList<Hotel> hotels, int hotelNum) {
+		int i, roomNum = -1;
+
+		for (i = 0; i < hotels.get(hotelNum).getReservations().size(); ++i) {
+			if (hotels.get(hotelNum).getReservations().get(i).getRoom().getRoomFloor() == room.getRoomFloor()
+					&& hotels.get(hotelNum).getReservations().get(i).getRoom().getRoomNumber() == room.getRoomNumber())
+				roomNum = i;
+		}
+
+		return roomNum;
+	}
+
 }

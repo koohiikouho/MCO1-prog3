@@ -241,7 +241,11 @@ public class ViewHotel {
                         true));
                 System.out.println("Check Out Date: " + toDateString(reservations.get(i),
                         false));
-
+                for (int j = 0; j < reservations.size(); j++) {
+                    System.out.println(reservations.get(i).getTransaction().get(j).getDescription() + " P"
+                            + reservations.get(i).getTransaction().get(j).getAmount());
+                }
+                System.out.println(reservations.get(i).getTransactionTotal());
                 input = Character.toUpperCase(scan.nextLine().charAt(0));
                 System.out.println("Enter '.' for next, ',' for back: ");
                 if (input == '.' && i < reservations.size())

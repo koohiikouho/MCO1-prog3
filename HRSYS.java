@@ -9,12 +9,10 @@ public class HRSYS {
         ViewHotel hotelView = new ViewHotel();
         ManageHotel manHotel = new ManageHotel();
         SimulateBooking daSims = new SimulateBooking();
-        
+
         Integer choice = 0;
         Scanner scan = new Scanner(System.in);
-        
-       
-        
+
         do {
             System.out.println("Enter option:");
             System.out.println("[1] Create Hotel\n[2] View Hotel\n[3] Manage Hotel\n[4] Simulate Booking");
@@ -22,6 +20,7 @@ public class HRSYS {
             switch (choice = Integer.parseInt(scan.nextLine())) {
                 case 1:
                     hotelsys.createHotel(scan);
+                    scan.close();
                     break;
                 case 2:
                     if (hotelsys.hotels.size() == 0)
@@ -31,10 +30,10 @@ public class HRSYS {
                     }
                     break;
                 case 3:
-                	manHotel.optionSel(hotelsys.hotels);
+                    manHotel.optionSel(hotelsys.hotels);
                     break;
                 case 4:
-                	daSims.SimBooking(hotelsys.hotels);
+                    daSims.SimBooking(hotelsys.hotels);
                     break;
                 case 5:
                     break;
