@@ -6,7 +6,11 @@ public class Room {
     private Integer roomNumber;
     private BigDecimal basePrice;
     private Boolean isReserved;
-
+    private Time checkInTime;
+    private Time checkOutTime;
+    private Date checkInDate;
+    private Date checkOutDate;
+    
     /**
      * Room constructor used for manually inputting a room
      */
@@ -68,6 +72,38 @@ public class Room {
 
     public void setBasePrice(BigDecimal basePrice) {
         this.basePrice = basePrice;
+    }
+    
+    public Time getCheckInTime() {
+        return checkInTime;
+    }
+    
+    public Time getCheckOutTime() {
+        return checkOutTime;
+    }
+    
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+    
+    public Date getCheckOutDate() {
+        return checkOutDate;
+    }
+    
+    public void setCheckInTime(Time checkInTime) {
+        this.checkInTime = checkInTime;
+    }
+    
+    public void setCheckOutTime(Time checkOutTime) {
+        this.checkOutTime = checkOutTime;
+    }
+    
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+    
+    public void setCheckOutDate(Date checkOutDate) {
+        this.checkOutDate = checkOutDate;
     }
 
 }

@@ -7,10 +7,13 @@ public class HRSYS {
     public static void main(String args[]) {
         HRSYS hotelsys = new HRSYS();
         ViewHotel hotelView = new ViewHotel();
+        ManageHotel manHotel = new ManageHotel();
+        SimulateBooking daSims = new SimulateBooking();
+        
         Integer choice = 0;
         Scanner scan = new Scanner(System.in);
         
-        ManageHotel manHotel = new ManageHotel();
+       
         
         do {
             System.out.println("Enter option:");
@@ -31,6 +34,7 @@ public class HRSYS {
                 	manHotel.optionSel(hotelsys.hotels);
                     break;
                 case 4:
+                	daSims.SimBooking(hotelsys.hotels);
                     break;
                 case 5:
                     break;

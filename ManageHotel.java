@@ -30,7 +30,7 @@ public class ManageHotel {
                 	removeReservation(sc1, hotels, viewHotelList(sc1, hotels));
                     break;
                 case 6:
-                	removeHotel(sc1, hotels, viewHotelList(sc1, hotels));
+                	removeHotel(hotels, viewHotelList(sc1, hotels));
                     break;
                 case 7:
                 	System.out.println("Exiting");
@@ -150,9 +150,9 @@ public class ManageHotel {
 		}
 	}
 	
-	public void removeHotel(Scanner scan, ArrayList<Hotel> hotels, int hotelNum)
+	public void removeHotel(ArrayList<Hotel> hotels, int hotelNum)
 	{
 		if(hotelNum > 0)
-			hotels.remove(hotelNum);
+			hotels.remove(hotelNum - 1);
 	}
 }
