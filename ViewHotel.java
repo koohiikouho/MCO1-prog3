@@ -119,9 +119,8 @@ public class ViewHotel {
             Date inputDate = new Date(year.intValue(), month.intValue(), day.intValue());
             String dateString = year + "/" + month + "/" + day;
 
-            if (hotels.getReservations().size() != 1) {
+            if (hotels.getReservations().size() != 0) {
                 for (i = 0; i < hotels.getReservations().size(); ++i) {
-
                     if (hotels.getReservations().get(i).getCheckInDate().before(inputDate) &&
                             hotels.getReservations().get(i).getCheckOutDate().after(inputDate)) {
                         reserved++;
@@ -229,7 +228,7 @@ public class ViewHotel {
         Character input = ' ';
         Integer i = 0;
         try {
-            do {
+            for (i = 0; i < reservations.size(); i++) {
                 System.out.println(
                         "Guest Name: " +
                                 reservations.get(i).getGuestName().getFirstName()
@@ -250,14 +249,14 @@ public class ViewHotel {
                 System.out.println("----------------------------------------------------");
                 System.out.println("Total " + reservations.get(i).getTransactionTotal());
 
-                System.out.println("Enter '.' for next, ',' for back: , 'x' to exit");
-                input = Character.toUpperCase(scan.nextLine().charAt(0));
-                if (input == '.')
-                    i++;
-                else if (input == ',') {
-                    i--;
-                }
-            } while (input != 'X');
+                // System.out.println("Enter '.' for next, ',' for back: , 'x' to exit");
+                // input = Character.toUpperCase(scan.nextLine().charAt(0));
+                // if (input == '.')
+                // i++;
+                // else if (input == ',') {
+                // i--;
+                // }
+            }
         } catch (Exception e) {
             System.err.println("No reservation info available!");
         }
@@ -279,7 +278,7 @@ public class ViewHotel {
                     + "/"
                     + Integer.toString(reservation.getCheckInDate().getMonth())
                     + "/" +
-                    Integer.toString(reservation.getCheckInDate().getDay());
+                    Integer.toString(reservation.getCheckInDate().getDate());
 
             return dateInString;
         } else {
@@ -289,7 +288,7 @@ public class ViewHotel {
                     + Integer
                             .toString(reservation.getCheckOutDate().getMonth())
                     + "/" +
-                    Integer.toString(reservation.getCheckOutDate().getDay());
+                    Integer.toString(reservation.getCheckOutDate().getDate());
             return dateInString;
         }
 

@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class SimulateBooking {
 
 	public void SimBooking(Scanner scan, ArrayList<Hotel> hotels) {
-		int i, hotelNum, roomNum, reserveInd = -1, day, month, year, hour, min;
+		int i, hotelNum = 0, roomNum = 0, reserveInd = -1, day = 0, month = 0, year = 0, hour = 0, min = 0;
 		String fName, lName, description;
 
 		if (hotels.size() != 0) {
@@ -165,8 +165,23 @@ public class SimulateBooking {
 
 				hotels.get(hotelNum).getReservations()
 						.add(new Reservation(name, checkInDate, checkOutDate, hotels.get(hotelNum).rooms.get(roomNum)));
+				System.out.println("Check In Date: "
+						+ hotels.get(hotelNum).getReservations().getLast().getCheckInDate().getYear() + "/"
+						+ hotels.get(hotelNum).getReservations().getLast().getCheckInDate().getMonth() + "/"
+						+ hotels.get(hotelNum).getReservations().getLast().getCheckInDate().getDate() + " "
+						+ hotels.get(hotelNum).getReservations().getLast().getCheckInDate().getHours() + ":"
+						+ hotels.get(hotelNum).getReservations().getLast().getCheckInDate().getMinutes());
+				System.out.println("Check Out Date: "
+						+ hotels.get(hotelNum).getReservations().getLast().getCheckOutDate().getYear() + "/"
+						+ hotels.get(hotelNum).getReservations().getLast().getCheckOutDate().getMonth() + "/"
+						+ hotels.get(hotelNum).getReservations().getLast().getCheckOutDate().getDate() + " "
+						+ hotels.get(hotelNum).getReservations().getLast().getCheckOutDate().getHours() + ":"
+						+ hotels.get(hotelNum).getReservations().getLast().getCheckOutDate().getMinutes());
 
-				long nights = (checkOutDate.getTime() - checkInDate.getTime()) / 86400000;
+				Date checkOutTemp = checkOutDate;
+				Date checkInTemp = checkInDate;
+
+				long nights = (checkOutTemp.getTime() - checkInTemp.getTime()) / 86400000;
 				BigDecimal nightsBigD = new BigDecimal(nights);
 
 				BigDecimal amount = hotels.get(hotelNum).rooms.get(roomNum).getBasePrice();

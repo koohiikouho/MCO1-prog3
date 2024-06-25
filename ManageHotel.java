@@ -195,6 +195,7 @@ public class ManageHotel {
 			else
 				for (i = 0; i < hotels.get(hotelNum).rooms.size(); ++i)
 					hotels.get(hotelNum).rooms.get(0).setBasePrice(price);
+
 		}
 	}
 

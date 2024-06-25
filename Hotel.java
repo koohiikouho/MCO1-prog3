@@ -151,4 +151,8 @@ public class Hotel {
         this.earningsEstimate = earningsEstimate;
     }
 
+    public void printRoom(int index) {
+        System.out.println("[" + (index + 1) + "]" + rooms.get(index).getRoomFloor() + "-"
+                + rooms.get(index).getRoomNumber());
+    }
 }

@@ -4,7 +4,7 @@ import java.util.*;
 public class test {
     public static void main(String[] args) {
         Date checkIn = new Date(2024, 6, 15);
-        Date checkOut = new Date(2024, 6, 16);
+        Date checkOut = new Date(2024, 6, 18);
         Date Test = new Date(2024, 6, 17);
         System.out.println(checkIn.before(Test));
         System.out.println(checkOut.after(Test));
