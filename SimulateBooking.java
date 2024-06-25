@@ -8,7 +8,6 @@ public class SimulateBooking {
 	{
 		try (Scanner scan = new Scanner(System.in)) {
 			int i, hotelNum, roomNum, day, month, year, hour, min, reserveInd = -1;
-			String meridiem;
 					
 			if(hotels.size() != 0)
 			{
@@ -31,7 +30,7 @@ public class SimulateBooking {
 			    else
 			    {
 //	        	CheckIn
-			    	System.out.println("Ok no reservations yet\n");
+			    	System.out.println("Ok no reservations yet");
 			    	System.out.println("What month is the Check in?");
 			    	month = Integer.parseInt(scan.nextLine());
 			    	
