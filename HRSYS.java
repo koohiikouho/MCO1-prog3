@@ -20,7 +20,6 @@ public class HRSYS {
             switch (choice = Integer.parseInt(scan.nextLine())) {
                 case 1:
                     hotelsys.createHotel(scan);
-                    scan.close();
                     break;
                 case 2:
                     if (hotelsys.hotels.size() == 0)
