@@ -276,7 +276,7 @@ public class ViewHotel {
             String dateInString = Integer
                     .toString(reservation.getCheckInDate().getYear())
                     + "/"
-                    + Integer.toString(reservation.getCheckInDate().getMonth())
+                    + Integer.toString(reservation.getCheckInDate().getMonth() + 1)
                     + "/" +
                     Integer.toString(reservation.getCheckInDate().getDate());
 
@@ -286,7 +286,7 @@ public class ViewHotel {
                     .toString(reservation.getCheckOutDate().getYear())
                     + "/"
                     + Integer
-                            .toString(reservation.getCheckOutDate().getMonth())
+                            .toString(reservation.getCheckOutDate().getMonth() + 1)
                     + "/" +
                     Integer.toString(reservation.getCheckOutDate().getDate());
             return dateInString;

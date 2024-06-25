@@ -167,13 +167,13 @@ public class SimulateBooking {
 						.add(new Reservation(name, checkInDate, checkOutDate, hotels.get(hotelNum).rooms.get(roomNum)));
 				System.out.println("Check In Date: "
 						+ hotels.get(hotelNum).getReservations().getLast().getCheckInDate().getYear() + "/"
-						+ hotels.get(hotelNum).getReservations().getLast().getCheckInDate().getMonth() + "/"
+						+ (hotels.get(hotelNum).getReservations().getLast().getCheckInDate().getMonth() + 1) + "/"
 						+ hotels.get(hotelNum).getReservations().getLast().getCheckInDate().getDate() + " "
 						+ hotels.get(hotelNum).getReservations().getLast().getCheckInDate().getHours() + ":"
 						+ hotels.get(hotelNum).getReservations().getLast().getCheckInDate().getMinutes());
 				System.out.println("Check Out Date: "
 						+ hotels.get(hotelNum).getReservations().getLast().getCheckOutDate().getYear() + "/"
-						+ hotels.get(hotelNum).getReservations().getLast().getCheckOutDate().getMonth() + "/"
+						+ (hotels.get(hotelNum).getReservations().getLast().getCheckOutDate().getMonth() + 1) + "/"
 						+ hotels.get(hotelNum).getReservations().getLast().getCheckOutDate().getDate() + " "
 						+ hotels.get(hotelNum).getReservations().getLast().getCheckOutDate().getHours() + ":"
 						+ hotels.get(hotelNum).getReservations().getLast().getCheckOutDate().getMinutes());
