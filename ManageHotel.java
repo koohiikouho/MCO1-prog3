@@ -219,9 +219,9 @@ public class ManageHotel {
 
 			for (i = 0; i < hotels.get(hotelNum).getReservations().size(); ++i) {
 				if (hotels.get(hotelNum).getReservations().get(i).getRoom().getRoomFloor() == hotels.get(hotelNum).rooms
-						.get(room - 1).getRoomFloor()
+						.get(room).getRoomFloor()
 						&& hotels.get(hotelNum).getReservations().get(i).getRoom()
-								.getRoomNumber() == hotels.get(hotelNum).rooms.get(room - 1).getRoomNumber())
+								.getRoomNumber() == hotels.get(hotelNum).rooms.get(room).getRoomNumber())
 					hotels.get(hotelNum).getReservations().remove(i);
 			}
 		}
