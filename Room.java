@@ -1,6 +1,5 @@
 import java.math.BigDecimal;
 import java.util.Scanner;
-import java.util.*;
 
 public class Room {
     private Integer roomFloor;

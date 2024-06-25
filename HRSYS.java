@@ -32,7 +32,7 @@ public class HRSYS {
                     manHotel.optionSel(hotelsys.hotels);
                     break;
                 case 4:
-                    daSims.SimBooking(scan, hotelsys.hotels);
+                    daSims.simBooking(scan, hotelsys.hotels);
                     break;
                 case 5:
                     break;

@@ -3,12 +3,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * the SimulateBooking Class is a method class that contains methods to simulate
+ * a booking that might be expounded on for MCO2
+ */
 public class SimulateBooking {
 
-	public void SimBooking(Scanner scan, ArrayList<Hotel> hotels) {
+	/**
+	 * SimBooking is a method that simulates the booking by asking for a person's
+	 * name, the check in date, check out date, and displays how much the entire
+	 * booking is
+	 * 
+	 * @param scan   import scanner from main
+	 * @param hotels hotels to store selection in
+	 */
+	public void simBooking(Scanner scan, ArrayList<Hotel> hotels) {
+
+		// variable declarations
 		int i, hotelNum = 0, roomNum = 0, reserveInd = -1, day = 0, month = 0, year = 0, hour = 0, min = 0;
 		String fName, lName, description;
-
+		// hotel selector
 		if (hotels.size() != 0) {
 			do {
 
@@ -23,7 +37,7 @@ public class SimulateBooking {
 					System.out.println("Please choose from the folowing hotels, try again");
 
 			} while (hotelNum > hotels.size() || hotelNum < 0);
-
+			// room number selection
 			do {
 
 				for (i = 0; i < hotels.get(hotelNum).rooms.size(); ++i) {
@@ -162,7 +176,7 @@ public class SimulateBooking {
 				} while (min < 0 || min > 59);
 
 				Date checkOutDate = new Date(year, month - 1, day, hour, min);
-
+				// Order Confirmation
 				hotels.get(hotelNum).getReservations()
 						.add(new Reservation(name, checkInDate, checkOutDate, hotels.get(hotelNum).rooms.get(roomNum)));
 				System.out.println("Check In Date: "
@@ -197,6 +211,14 @@ public class SimulateBooking {
 		}
 	}
 
+	/**
+	 * findReservation is a method that finds reservations for a room in a hotel
+	 * 
+	 * @param room     room to search for
+	 * @param hotels   hotels for hotelNum
+	 * @param hotelNum hotel to search in, index for hotel
+	 * @return returns the index of the room
+	 */
 	public int findReservation(Room room, ArrayList<Hotel> hotels, int hotelNum) {
 		int i, roomNum = -1;
 

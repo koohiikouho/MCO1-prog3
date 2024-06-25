@@ -2,6 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.math.BigDecimal;
 
+/**
+ * the Hotel class contains the name of the hotel, all of the rooms inside it,
+ * reservations that are related to the hotel and an earningEstimate in
+ * BigDecimal that contains how much the hotel earns from all the reservations
+ */
 public class Hotel {
     private String name;
     ArrayList<Room> rooms = new ArrayList<Room>();
@@ -151,6 +156,13 @@ public class Hotel {
         this.earningsEstimate = earningsEstimate;
     }
 
+    /**
+     * printRoom is a function that gets an index and prints the roomfloor and room
+     * number of that room in this format
+     * [index- 1] roomfloor-roomnumber
+     * 
+     * @param index index of the room to print
+     */
     public void printRoom(int index) {
         System.out.println("[" + (index + 1) + "]" + rooms.get(index).getRoomFloor() + "-"
                 + rooms.get(index).getRoomNumber());
