@@ -53,8 +53,10 @@ public class ViewHotel {
                 System.out.println("Hotel name: " + hotels.getName());
                 System.out.println(("No. of rooms in hotel:  " + hotels.rooms.size()));
                 System.out.println("Estimated earnings: " + hotels.getEarningsEstimate());
-            } else {
+            } else if (highLow == 2) {
                 lowInfo(scan, hotels);
+            } else{
+                System.out.println("Wrong input!");
             }
         } catch (Exception e) { // if input is outside 1 or 2
             System.err.println("Input out of bounds!");
@@ -256,6 +258,7 @@ public class ViewHotel {
                 }
                 System.out.println("----------------------------------------------------");
                 System.out.println("Total " + reservations.get(i).getTransactionTotal());
+                System.out.println("");
 
                 // System.out.println("Enter '.' for next, ',' for back: , 'x' to exit");
                 // input = Character.toUpperCase(scan.nextLine().charAt(0));
