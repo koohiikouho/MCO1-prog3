@@ -107,7 +107,7 @@ public class SimulateBooking {
 
 				} while (min < 0 || min > 59);
 
-				Date checkInDate = new Date(year, month, day, hour, min);
+				Date checkInDate = new Date(year, month - 1, day, hour, min);
 
 				// CheckOut------------------------------------------------------------------------------------------------------------------
 
@@ -161,7 +161,7 @@ public class SimulateBooking {
 
 				} while (min < 0 || min > 59);
 
-				Date checkOutDate = new Date(year, month, day, hour, min);
+				Date checkOutDate = new Date(year, month - 1, day, hour, min);
 
 				hotels.get(hotelNum).getReservations()
 						.add(new Reservation(name, checkInDate, checkOutDate, hotels.get(hotelNum).rooms.get(roomNum)));
