@@ -35,9 +35,13 @@ public class Hotel {
                 System.out.println("Only 50 rooms are allowed in the system!");
             }
             System.out.print("\nHow many floors?: ");
-            floors = Integer.parseInt(scan.nextLine());
-            System.out.print("\nHow many rooms per floor?: ");
-            roomPFloor = Integer.parseInt(scan.nextLine());
+            do {
+                floors = Integer.parseInt(scan.nextLine());
+            } while (floors <= -1);
+            do {
+                System.out.print("\nHow many rooms per floor?: ");
+                roomPFloor = Integer.parseInt(scan.nextLine());
+            } while (roomPFloor <= -1);
             count++;
         } while (roomPFloor * floors > 50);
 
@@ -164,7 +168,13 @@ public class Hotel {
      * @param index index of the room to print
      */
     public void printRoom(int index) {
-        System.out.println("[" + (index + 1) + "]" + rooms.get(index).getRoomFloor() + "-"
-                + rooms.get(index).getRoomNumber());
+        try {
+            System.out.println("[" + (index + 1) + "]" + rooms.get(index).getRoomFloor() + "-"
+                    + rooms.get(index).getRoomNumber());
+
+        } catch (Exception e) {
+            System.out.println("Invalid index!!");
+        }
+
     }
 }

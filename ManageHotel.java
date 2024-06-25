@@ -2,7 +2,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 /**
- * ManageHotel is a method class to manage the Hotel
+ * ManageHotel is a method class to manage the Hotel thorough different options
  */
 public class ManageHotel {
 
@@ -15,43 +15,47 @@ public class ManageHotel {
 	public void optionSel(ArrayList<Hotel> hotels) {
 		int option = 0;
 		Scanner sc1 = new Scanner(System.in);
+		try {
+			do {
+				System.out.println("Enter option:");
+				System.out.println(
+						"[1] Change Hotel Name\n[2] Add Rooms\n[3] Remove Rooms\n[4] Update Room Base Price\n[5] Remove Reservation\n[6] Remove Hotel\n[7] Exit\n");
 
-		do {
-			System.out.println("Enter option:");
-			System.out.println(
-					"[1] Change Hotel Name\n[2] Add Rooms\n[3] Remove Rooms\n[4] Update Room Base Price\n[5] Remove Reservation\n[6] Remove Hotel\n[7] Exit\n");
-
-			switch (option = Integer.parseInt(sc1.nextLine())) {
-				case 1:
-					changeHotelName(sc1, hotels, viewHotelList(sc1, hotels));
-					break;
-				case 2:
-					addRooms(sc1, hotels, viewHotelList(sc1, hotels));
-					break;
-				case 3:
-					removeRooms(sc1, hotels, viewHotelList(sc1, hotels));
-					break;
-				case 4:
-					updateRoomPrice(sc1, hotels, viewHotelList(sc1, hotels));
-					break;
-				case 5:
-					removeReservation(sc1, hotels, viewHotelList(sc1, hotels));
-					break;
-				case 6:
-					removeHotel(hotels, viewHotelList(sc1, hotels));
-					break;
-				case 7:
-					System.out.println("Exiting");
-					break;
-				default:
-					System.err.println("Input out of bounds");
-					break;
-			}
-		} while (option != 7);
+				switch (option = Integer.parseInt(sc1.nextLine())) {
+					case 1:
+						changeHotelName(sc1, hotels, viewHotelList(sc1, hotels));
+						break;
+					case 2:
+						addRooms(sc1, hotels, viewHotelList(sc1, hotels));
+						break;
+					case 3:
+						removeRooms(sc1, hotels, viewHotelList(sc1, hotels));
+						break;
+					case 4:
+						updateRoomPrice(sc1, hotels, viewHotelList(sc1, hotels));
+						break;
+					case 5:
+						removeReservation(sc1, hotels, viewHotelList(sc1, hotels));
+						break;
+					case 6:
+						removeHotel(hotels, viewHotelList(sc1, hotels));
+						break;
+					case 7:
+						System.out.println("Exiting");
+						break;
+					default:
+						System.err.println("Input out of bounds");
+						break;
+				}
+			} while (option != 7);
+		} catch (Exception e) {
+			System.out.println("Invalid input!!");
+		}
 	}
 
 	/**
-	 * viewHotelList allows the user to view the List of Hotels
+	 * viewHotelList allows the user to view how many hotels there are in the
+	 * arraylist
 	 * 
 	 * @param scan   imports scanner
 	 * @param hotels imports hotel arrayList
@@ -87,6 +91,7 @@ public class ManageHotel {
 		if (hotelNum >= 0) {
 			System.out.println("What do you want to set it to?");
 			hotels.get(hotelNum).setName(scan.nextLine());
+			System.out.println("Name set to " + hotels.get(hotelNum).getName());
 		}
 	}
 
