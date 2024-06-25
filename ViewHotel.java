@@ -116,7 +116,7 @@ public class ViewHotel {
 
             // variable declarations again
             int reserved = 0, free = 0;
-            Date inputDate = new Date(year.intValue(), month.intValue(), day.intValue());
+            Date inputDate = new Date(year.intValue(), month.intValue() - 1, day.intValue());
             String dateString = year + "/" + month + "/" + day;
 
             if (hotels.getReservations().size() != 0) {
@@ -242,7 +242,7 @@ public class ViewHotel {
                         true));
                 System.out.println("Check Out Date: " + toDateString(reservations.get(i),
                         false));
-                for (int j = 0; j < reservations.size(); j++) {
+                for (int j = 0; j < reservations.get(i).getTransaction().size(); j++) {
                     System.out.println(reservations.get(i).getTransaction().get(j).getDescription() + " P"
                             + reservations.get(i).getTransaction().get(j).getAmount());
                 }
