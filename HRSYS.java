@@ -15,9 +15,9 @@ public class HRSYS {
 
         do {
             System.out.println("Enter option:");
-            System.out.println("[1] Create Hotel\n[2] View Hotel\n[3] Manage Hotel\n[4] Simulate Booking");
-
-            switch (choice = Integer.parseInt(scan.nextLine())) {
+            System.out.println("[1] Create Hotel\n[2] View Hotel\n[3] Manage Hotel\n[4] Simulate Booking\n[5] Exit");
+            choice = Integer.parseInt(scan.nextLine());
+            switch (choice) {
                 case 1:
                     hotelsys.createHotel(scan);
                     break;
@@ -43,7 +43,6 @@ public class HRSYS {
         } while (choice != 5);
         // System.out.println( hotelsys.hotels.get(0).rooms.get(0).getRoomFloor() + "-"
         // + hotelsys.hotels.get(0).rooms.get(0).getRoomNumber());
-        scan.close();
 
     }
 
