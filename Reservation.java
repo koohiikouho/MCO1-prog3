@@ -8,6 +8,13 @@ public class Reservation {
     private Date checkOutDate; // these Date classes are for view hotel
     private Room room;
     private ArrayList<Transaction> transaction = new ArrayList<Transaction>();
+    
+    public Reservation(Name guestName, Date checkInDate, Date checkOutDate, Room room) {
+    	this.guestName = guestName;
+    	this.checkInDate = checkInDate;
+    	this.checkOutDate = checkOutDate;
+    	this.room = room;
+    }
 
     /**
      * getTransactionTotal is a method that returns a BigDecimal value with all the
