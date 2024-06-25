@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -7,20 +8,43 @@ public class SimulateBooking {
 	public void SimBooking(ArrayList<Hotel> hotels) 
 	{
 		try (Scanner scan = new Scanner(System.in)) {
-			int i, hotelNum, roomNum, day, month, year, hour, min, reserveInd = -1;
-					
+			int i, hotelNum, roomNum, reserveInd = -1, day, month, year, hour, min;
+			String fName, lName, description;
+			BigDecimal amount;
+			
+			
 			if(hotels.size() != 0)
 			{
-			    for (i = 0; i < hotels.size(); ++i)
-			    {
-			        System.out.println("[" + (i + 1) + "] " + hotels.get(i).getName() + "\n");
-			    }
-			    System.out.println("Select the hotel number: ");
-			    hotelNum = Integer.parseInt(scan.nextLine()) - 1;
+			    do {
+			    	
+			    	for (i = 0; i < hotels.size(); ++i)
+				    {
+				        System.out.println("[" + (i + 1) + "] " + hotels.get(i).getName() + "\n");
+				    }
+			    	
+			    	 System.out.println("Select the hotel number: ");
+					 hotelNum = Integer.parseInt(scan.nextLine()) - 1;
+					 
+					 if(hotelNum > hotels.size() || hotelNum <= 0)
+				    		System.out.println("Please choose from the folowing hotels, try again");
+					 
+			    } while(hotelNum > hotels.size() || hotelNum <= 0);
 			    
-			    System.out.println("Select your room number:");
-			    roomNum = Integer.parseInt(scan.nextLine()) - 1;
-			    
+			    do {
+			    	
+			    	for (i = 0; i < hotels.get(hotelNum).rooms.size(); ++i)
+				    {
+				        System.out.println("[" + (i + 1) + "] " + hotels.get(hotelNum).rooms.get(i).getRoomFloor() + "-" + hotels.get(hotelNum).rooms.get(i).getRoomNumber());
+				    }
+			    	
+				    System.out.println("Select your room number:");
+				    roomNum = Integer.parseInt(scan.nextLine()) - 1;
+				    
+				    if(roomNum > hotels.get(hotelNum).rooms.size() || roomNum <= 0)
+			    		System.out.println("Please choose from the folowing rooms, try again");
+				    
+			    } while(roomNum > hotels.get(hotelNum).rooms.size() || roomNum <= 0);
+
 			    reserveInd = findReservation(hotels.get(hotelNum).rooms.get(roomNum), hotels, hotelNum);
 			    
 			    if(reserveInd != -1)
@@ -31,40 +55,127 @@ public class SimulateBooking {
 			    {
 //	        	CheckIn
 			    	System.out.println("Ok no reservations yet");
-			    	System.out.println("What month is the Check in?");
-			    	month = Integer.parseInt(scan.nextLine());
 			    	
-			    	System.out.println("What Day is the Check in?");
-			    	day = Integer.parseInt(scan.nextLine());
+			    	System.out.println("Customer's first name?");
+			    	fName = scan.nextLine();
 			    	
-			    	System.out.println("What Year is the Check in?");
-			    	year = Integer.parseInt(scan.nextLine());
+			    	System.out.println("Customer's last name?");
+			    	lName = scan.nextLine();
 			    	
-			    	System.out.println("Hour?");
-			    	hour = Integer.parseInt(scan.nextLine());
+			    	Name name = new Name(fName, lName);
 			    	
-			    	System.out.println("Minute?");
-			    	min = Integer.parseInt(scan.nextLine());
+			    	do {
+				    	System.out.println("What month is the Check in?");
+				    	month = Integer.parseInt(scan.nextLine());
+				    	
+				    	if(month <= 0 || month > 12)
+				    		System.out.println("Please select an existing month, try again");
+				    	
+			    	} while(month <= 0 || month > 12);
 			    	
-			    	hotels.get(hotelNum).rooms.get(roomNum).setCheckInDate(new Date(year, month, day, hour, min));
+			    	do {
+			    		System.out.println("What Day is the Check in?");
+				    	day = Integer.parseInt(scan.nextLine());
+				    	
+				    	if(day <= 0 || day > 31)
+				    		System.out.println("Please select an appropriate day, try again");
+				    	
+			    	} while(day <= 0 || day > 31);
 			    	
-//	        	CheckOut
-			    	System.out.println("What month is the Check Out?");
-			    	month = Integer.parseInt(scan.nextLine());
+			    	do {
+			    		System.out.println("What Year is the Check in?"); 
+			    		year = Integer.parseInt(scan.nextLine());
+				    	
+				    	if(year < 2024)
+				    		System.out.println("We can't go back in time friend, try again a bit bigger the next time please");
+				    	
+				    	if(year > 2050)
+				    		System.out.println("I think thats a bit too far into the future, try again this time smaller");
+				    	
+			    	} while(year < 2024 || year >2050);
 			    	
-			    	System.out.println("What Day is the Check Out?");
-			    	day = Integer.parseInt(scan.nextLine());
+			    	do {
+			    		System.out.println("At what Hour are we expecting the guest?");
+				    	hour = Integer.parseInt(scan.nextLine());
+				    	
+				    	if(hour < 0 || hour > 23)
+				    		System.out.println("We follow military time, please pick an hour from 0 to 23");
+				    	
+			    	} while(hour < 0 || hour > 23);
 			    	
-			    	System.out.println("What Year is the Check Out?");
-			    	year = Integer.parseInt(scan.nextLine());
+			    	do {
+			    		System.out.println("To be more accurate, at what minute are we expecting the guest?");
+				    	min = Integer.parseInt(scan.nextLine());
+				    	
+				    	if(min < 0 || min > 59)
+				    		System.out.println("Please pick an hour from 0 to 59");
+				    	
+			    	} while(min < 0 || min > 59);
 			    	
-			    	System.out.println("Hour?");
-			    	hour = Integer.parseInt(scan.nextLine());
+			    	Date checkInDate = new Date(year, month, day, hour, min);
 			    	
-			    	System.out.println("Minute?");
-			    	min = Integer.parseInt(scan.nextLine());
+//	        	CheckOut------------------------------------------------------------------------------------------------------------------
 			    	
-			    	hotels.get(hotelNum).rooms.get(roomNum).setCheckOutDate(new Date(year, month, day, hour, min));
+			    	do {
+				    	System.out.println("What month is the Check Out?");
+				    	month = Integer.parseInt(scan.nextLine());
+				    	
+				    	if(month <= 0 || month > 12)
+				    		System.out.println("Please select an existing month, try again");
+				    	
+			    	} while(month <= 0 || month > 12);
+			    	
+			    	do {
+			    		System.out.println("What Day is the Check Out?");
+				    	day = Integer.parseInt(scan.nextLine());
+				    	
+				    	if(day <= 0 || day > 31)
+				    		System.out.println("Please select an appropriate day, try again");
+				    	
+			    	} while(day <= 0 || day > 31);
+			    	
+			    	do {
+			    		System.out.println("What Year is the Check Out?"); 
+			    		year = Integer.parseInt(scan.nextLine());
+				    	
+				    	if(year < 2024)
+				    		System.out.println("We can't go back in time friend, try again a bit bigger the next time please");
+				    	
+				    	if(year > 2050)
+				    		System.out.println("I think thats a bit too far into the future, try again this time smaller");
+				    	
+			    	} while(year < 2024 || year >2050);
+			    	
+			    	do {
+			    		System.out.println("At what Hour are we expecting the guest to leave?");
+				    	hour = Integer.parseInt(scan.nextLine());
+				    	
+				    	if(hour < 0 || hour > 23)
+				    		System.out.println("We follow military time, please pick an hour from 0 to 23");
+				    	
+			    	} while(hour < 0 || hour > 23);
+			    	
+			    	do {
+			    		System.out.println("To be more accurate, at what minute are we expecting the guest to be out of the hotel?");
+				    	min = Integer.parseInt(scan.nextLine());
+				    	
+				    	if(min < 0 || min > 59)
+				    		System.out.println("Please pick an hour from 0 to 59");
+				    	
+			    	} while(min < 0 || min > 59);
+			    	
+			    	Date checkOutDate = new Date(year, month, day, hour, min);
+			    	
+			    	hotels.get(hotelNum).getReservations().add(new Reservation(name, checkInDate, checkOutDate, hotels.get(hotelNum).rooms.get(roomNum)));
+			    	
+			    		
+		    		System.out.println("Amount paid by customer");
+			    	amount = scan.nextBigDecimal();
+				    	
+			    	System.out.println("Description");
+			    	description = scan.nextLine();
+			    	
+			    	hotels.get(hotelNum).getReservations().getLast().getTransaction().add(new Transaction(amount, description));
 			    }
 			}
 		} catch (NumberFormatException e) {

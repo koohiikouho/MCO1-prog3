@@ -118,13 +118,13 @@ public class ManageHotel {
 					System.out.println("Enter FloorNumber");
 					numFloor = Integer.parseInt(scan.nextLine());
 					
-					if(numFloor <= hotels.get(hotelNum).rooms.getLast().getRoomFloor())
+					if(numFloor >= hotels.get(hotelNum).rooms.getLast().getRoomFloor() && numFloor <= 0)
 					{
 						System.out.println("We can't just construct a new floor");
 						System.out.println("Please pick an existing floor");
 					}
 						
-				}while(numFloor <= hotels.get(hotelNum).rooms.getLast().getRoomFloor());
+				}while(numFloor >= hotels.get(hotelNum).rooms.getLast().getRoomFloor() && numFloor <= 0);
 				
 				do
 				{
@@ -176,10 +176,10 @@ public class ManageHotel {
 				System.out.println("Please select a room to be removed");
 				room = Integer.parseInt(scan.nextLine()) - 1;
 				
-				if(room + 1 >= hotels.get(hotelNum).rooms.size() || room + 1 <= 0)
+				if(room >= hotels.get(hotelNum).rooms.size() || room <= 0)
 					System.out.println("Please select from the choices above");
 			
-			}while(room + 1 >= hotels.get(hotelNum).rooms.size() || room + 1 <= 0);
+			}while(room >= hotels.get(hotelNum).rooms.size() || room <= 0);
 			
 			for(i = 0; i < hotels.get(hotelNum).getReservations().size(); ++i)
 			{
@@ -204,19 +204,15 @@ public class ManageHotel {
      */
 	public void updateRoomPrice(Scanner scan, ArrayList<Hotel> hotels, int hotelNum) {
 		if (hotelNum >= 0) {
-			int i, j;
-			boolean check = true;
+			int i;
 			BigDecimal price;
 			System.out.println("What is the new base price?");
 			price = scan.nextBigDecimal();
 
-			for (i = 0; i < hotels.get(hotelNum).rooms.size(); ++i) {
-				if (hotels.get(hotelNum).getReservations().size() != 0)
-					check = false;
-			}
-
-			if (check == true)
-				for (j = 0; j < hotels.get(hotelNum).rooms.size(); ++i)
+			if(hotels.get(hotelNum).getReservations().size() > 0)
+				System.out.println("Cannont change the price while there are reservations still in place");
+			else
+				for (i = 0; i < hotels.get(hotelNum).rooms.size(); ++i)
 					hotels.get(hotelNum).rooms.get(0).setBasePrice(price);
 		}
 	}
