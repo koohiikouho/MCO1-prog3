@@ -107,12 +107,20 @@ public class ViewHotel {
             Integer i, year, month, day;
 
             // change this to something simpler later
-            System.out.println("Enter year: ");
-            year = Integer.parseInt(scan.nextLine());
-            System.out.println("Enter month:");
+            do { 
+                System.out.println("Enter year: ");
+                year = Integer.parseInt(scan.nextLine());  
+            } while (year < 2000);
+            do { 
+                System.out.println("Enter month:");
             month = Integer.parseInt(scan.nextLine());
-            System.out.println("Enter day: ");
+            } while ( !(month >= 1 && month <= 11 ));
+            
+            do { 
+                System.out.println("Enter day: ");
             day = Integer.parseInt(scan.nextLine());
+            } while (!(day >= 1 && day <= 31));
+            
 
             // variable declarations again
             int reserved = 0, free = 0;
@@ -193,8 +201,8 @@ public class ViewHotel {
         month = Integer.parseInt(scan.nextLine());
 
         // instantiate date classes as search keys
-        Date afterDate = new Date(year.intValue(), month.intValue(), 1);
-        Date beforeDate = new Date(year.intValue(), month.intValue(), 31);
+        Date afterDate = new Date(year.intValue(), month.intValue() - 1, 1);
+        Date beforeDate = new Date(year.intValue(), month.intValue() - 1, 31);
         String dateString = year + "/"
                 + month;
 
