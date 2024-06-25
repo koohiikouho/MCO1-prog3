@@ -1,13 +1,17 @@
-// import java.util.*;
+import java.math.BigDecimal;
+import java.util.*;
 
-// public class test {
+public class test {
+    public static void main(String[] args) {
+        Date checkIn = new Date(2024, 6, 15);
+        Date checkOut = new Date(2024, 6, 16);
+        Date Test = new Date(2024, 6, 17);
+        System.out.println(checkIn.before(Test));
+        System.out.println(checkOut.after(Test));
+        if (checkIn.before(Test) && checkOut.after(Test))
+            System.out.println("working");
+        else
+            System.out.println("not working");
 
-// public static void main(String[] args) {
-// Date date1 = new Date(2024, 12, 25, 12, 30);
-// Date date2 = new Date(2025, 12, 25, 12, 30);
-
-// long nights = (date2.getTime() - date1.getTime()) / 86400000;
-
-// System.out.println(nights);
-// }
-// }
+    }
+}

@@ -75,8 +75,9 @@ public class Hotel {
         this.earningsEstimate = BigDecimal.valueOf(0);
         for (int i = 0; i < reservations.size(); ++i) {
             for (int j = 0; j < reservations.get(i).getTransaction().size(); ++j)
-                earningsEstimate.add(reservations.get(i).getTransaction().get(j).getAmount());
+                earningsEstimate = earningsEstimate.add(reservations.get(i).getTransaction().get(j).getAmount());
         }
+
     }
 
     /**

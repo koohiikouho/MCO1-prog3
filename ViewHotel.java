@@ -121,12 +121,14 @@ public class ViewHotel {
 
             if (hotels.getReservations().size() != 1) {
                 for (i = 0; i < hotels.getReservations().size(); ++i) {
-                    if (hotels.getReservations().get(i).getCheckInDate().after(inputDate) &&
-                            hotels.getReservations().get(i).getCheckOutDate().before(inputDate)) {
+
+                    if (hotels.getReservations().get(i).getCheckInDate().before(inputDate) &&
+                            hotels.getReservations().get(i).getCheckOutDate().after(inputDate)) {
                         reserved++;
                     }
                 }
             }
+
             free = hotels.rooms.size() - reserved;
 
             System.out.println("Reserved rooms during " + dateString + ": " + reserved);
@@ -206,8 +208,8 @@ public class ViewHotel {
             for (int i = 0; i < hotels.getReservations().size(); ++i) {
                 if (hotels.getReservations().get(i).getRoom().getRoomFloor() == floor
                         && hotels.getReservations().get(i).getRoom().getRoomNumber() == number) {
-                    if (afterDate.after(hotels.getReservations().get(i).getCheckInDate())
-                            && beforeDate.before(hotels.getReservations().get(i).getCheckInDate())) {
+                    if (afterDate.before(hotels.getReservations().get(i).getCheckInDate())
+                            && beforeDate.after(hotels.getReservations().get(i).getCheckInDate())) {
                         System.out.println(toDateString(hotels.getReservations().get(i), true) + " until "
                                 + toDateString(hotels.getReservations().get(i), false));
                     }
@@ -245,12 +247,14 @@ public class ViewHotel {
                     System.out.println(reservations.get(i).getTransaction().get(j).getDescription() + " P"
                             + reservations.get(i).getTransaction().get(j).getAmount());
                 }
-                System.out.println(reservations.get(i).getTransactionTotal());
+                System.out.println("----------------------------------------------------");
+                System.out.println("Total " + reservations.get(i).getTransactionTotal());
+
+                System.out.println("Enter '.' for next, ',' for back: , 'x' to exit");
                 input = Character.toUpperCase(scan.nextLine().charAt(0));
-                System.out.println("Enter '.' for next, ',' for back: ");
-                if (input == '.' && i < reservations.size())
+                if (input == '.')
                     i++;
-                else if (input == ',' && i > 0) {
+                else if (input == ',') {
                     i--;
                 }
             } while (input != 'X');
