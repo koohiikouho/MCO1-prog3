@@ -189,20 +189,32 @@ public class ManageHotel {
 	 * @param hotelNum imports the index of the user's chosen hotel
 	 */
 	public void updateRoomPrice(Scanner scan, ArrayList<Hotel> hotels, int hotelNum) {
-		if (hotelNum >= 0) {
-			int i;
+        if (hotelNum >= 0) {
+            int i;
+            String money;
+            
+            do {
+                System.out.println("What is the new base price?");
+                money = scan.nextLine();
+                
+                if(Integer.parseInt(money) >= 100) 
+                {
+                    BigDecimal price = new BigDecimal(money.toString());
+                    
+                    if (hotels.get(hotelNum).getReservations().size() > 0)
+                        System.out.println("Cannont change the price while there are reservations still in place");
+                    else
+                        for (i = 0; i < hotels.get(hotelNum).rooms.size(); ++i)
+                            hotels.get(hotelNum).rooms.get(0).setBasePrice(price);
 
-			System.out.println("What is the new base price?");
-			BigDecimal price = new BigDecimal(scan.nextLine());
-
-			if (hotels.get(hotelNum).getReservations().size() > 0)
-				System.out.println("Cannont change the price while there are reservations still in place");
-			else
-				for (i = 0; i < hotels.get(hotelNum).rooms.size(); ++i)
-					hotels.get(hotelNum).rooms.get(0).setBasePrice(price);
-
-		}
-	}
+                }
+                else
+                    System.out.println("Cannot set room price lower than 100");
+                    
+            } while(Integer.parseInt(money) < 100);
+            
+        }
+    }
 
 	/**
 	 * removeReservation allows the user to remove reservations from the reservation
