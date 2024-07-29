@@ -20,8 +20,9 @@ public class SimulateBooking {
 	public void simBooking(Scanner scan, ArrayList<Hotel> hotels) {
 
 		// variable declarations
-		int i, hotelNum = 0, roomNum = 0, reserveInd = -1, day = 0, month = 0, year = 0, hour = 0, min = 0;
-		String fName, lName, description;
+		int i, hotelNum = 0, roomNum = 0, reserveInd = -1, day = 0, month = 0, year = 0, hour = 0, min = 0, loop = 0, pass = 0;
+		
+		String fName, lName, description, discount, tempDescript;
 		// hotel selector
 		if (hotels.size() != 0) {
 			do {
@@ -194,19 +195,134 @@ public class SimulateBooking {
 
 				Date checkOutTemp = checkOutDate;
 				Date checkInTemp = checkInDate;
-
+				long o;
 				long nights = (checkOutTemp.getTime() - checkInTemp.getTime()) / 86400000;
-				BigDecimal nightsBigD = new BigDecimal(nights);
-
-				BigDecimal amount = hotels.get(hotelNum).rooms.get(roomNum).getBasePrice();
-				amount = amount.multiply(nightsBigD);
-
+				int a = checkInTemp.getDate();
+				
+				description = "";
+				
+				for(o = 0; o < nights; ++o)
+				{
+					BigDecimal multiply = new BigDecimal(hotels.get(hotelNum).getDPM()[a - 1] / 100);
+					BigDecimal amount = hotels.get(hotelNum).rooms.get(roomNum).getBasePrice();
+					amount = amount.multiply(multiply);
+					hotels.get(hotelNum).getReservations().getLast().getTransaction().add(new Transaction(amount, description));
+					a++;
+				}
+				
+				loop = 0;
+				do {
+					System.out.println("Input discount code? (y/n)");
+					discount = scan.nextLine();
+					switch (discount) 
+					{
+		                case "y":
+		                case "yes":
+		                case "YES":
+		                case "Y":
+		                	System.out.println("Please input the code now");
+							discount = scan.nextLine();
+		                	if(discount.compareTo("I_WORK_HERE") == 0)
+		    				{
+		                		if(hotels.get(hotelNum).getReservations().getLast().getTransaction().getFirst().getDescription().contains("discount1") == false)
+		                		{
+		                			BigDecimal multi = new BigDecimal(0.90);
+			                		for(i = 0; i < hotels.get(hotelNum).getReservations().getLast().getTransaction().size(); ++i)
+			                		{
+			                			hotels.get(hotelNum).getReservations().getLast().getTransaction().get(i).setAmount(hotels.get(hotelNum).getReservations().getLast().getTransaction().get(i).getAmount().multiply(multi));
+			                			tempDescript = hotels.get(hotelNum).getReservations().getLast().getTransaction().get(i).getDescription();
+			                			hotels.get(hotelNum).getReservations().getLast().getTransaction().get(i).setDescription(tempDescript.concat("discount1 "));
+			                		}
+		                		}
+		    				}
+		    				else if(discount.compareTo("STAY4_GET1") == 0)
+		    				{
+		    					if(hotels.get(hotelNum).getReservations().getLast().getTransaction().getFirst().getDescription().contains("discount2") == false)
+		                		{
+			    					if(hotels.get(hotelNum).getReservations().getLast().getTransaction().size() >= 5)
+			    					{
+			    						BigDecimal multi = new BigDecimal(0);
+			    						hotels.get(hotelNum).getReservations().getLast().getTransaction().getFirst().setAmount(multi);
+			    						for(i = 0; i < hotels.get(hotelNum).getReservations().getLast().getTransaction().size(); ++i)
+				                		{
+				                			tempDescript = hotels.get(hotelNum).getReservations().getLast().getTransaction().get(i).getDescription();
+				                			hotels.get(hotelNum).getReservations().getLast().getTransaction().get(i).setDescription(tempDescript.concat("discount2 "));
+				                		}
+			    					}
+			    					else
+				    				{
+				    					System.out.println("Sorry you are not eligible for this discount");
+				    					loop = 1;
+				    				}
+		                		}
+		    				}
+		    				else if(discount.compareTo("PAYDAY") == 0)
+		    				{
+		    					if(hotels.get(hotelNum).getReservations().getLast().getTransaction().getFirst().getDescription().contains("discount3") == false)
+		                		{
+			    					Date in15 = new Date(checkInTemp.getYear(), checkInTemp.getDate(), 15);
+			    					Date in30 = new Date(checkInTemp.getYear(), checkInTemp.getDate(), 30);
+			    					Date out15 = new Date(checkOutTemp.getYear(), checkOutTemp.getDate(), 15);
+			    					Date out30 = new Date(checkOutTemp.getYear(), checkOutTemp.getDate(), 30);
+			    					
+			    					if(checkInTemp.getTime() < in15.getTime())
+			    					{
+			    						if(checkOutTemp.getTime() >= in15.getTime())
+			    							pass = 1;
+			    					}
+			    					else if (checkInTemp.getTime() == in15.getTime() || checkInTemp.getTime() == in30.getTime() || checkInTemp.getTime() == out15.getTime() || checkInTemp.getTime() == out30.getTime())
+			    					{
+			    						pass = 1;
+			    					}
+			    					else if (checkOutTemp.getTime() == out15.getTime() || checkOutTemp.getTime() == out30.getTime() || checkOutTemp.getTime() == in15.getTime() || checkOutTemp.getTime() == in30.getTime())
+			    					{
+			    						pass = 1;
+			    					}
+			    					else if(checkInTemp.getTime() < in30.getTime())
+			    					{
+			    						if(checkOutTemp.getTime() >= in30.getTime())
+			    							pass = 1;
+			    					}
+			    					
+			    					if(pass == 1)
+			    					{
+			    						BigDecimal multi = new BigDecimal(0.93);
+				                		for(i = 0; i < hotels.get(hotelNum).getReservations().getLast().getTransaction().size(); ++i)
+				                		{
+				                			hotels.get(hotelNum).getReservations().getLast().getTransaction().get(i).setAmount(hotels.get(hotelNum).getReservations().getLast().getTransaction().get(i).getAmount().multiply(multi));
+				                			tempDescript = hotels.get(hotelNum).getReservations().getLast().getTransaction().get(i).getDescription();
+				                			hotels.get(hotelNum).getReservations().getLast().getTransaction().get(i).setDescription(tempDescript.concat("discount3 "));
+				                		}
+			    					}
+			    					else
+				    				{
+				    					System.out.println("Sorry you are not eligible for this discount");
+				    					loop = 1;
+				    				}
+		                		}
+		    				}
+		                    break;
+		                case "no":
+		                case "N":
+		                case "NO":
+		                case "n":
+		                	loop = 0;
+		                    break;
+		                default:
+		                    System.out.println("error");
+		                    loop = 1;
+		                    break;
+					}
+				} while(loop == 1);
+				
+				BigDecimal amount = new BigDecimal(0);
+				for(i = 0; i < hotels.get(hotelNum).getReservations().getLast().getTransaction().size(); ++i)
+        		{
+        			amount.add(hotels.get(hotelNum).getReservations().getLast().getTransaction().get(i).getAmount());
+        		}
+				
 				System.out.println("Amount to be paid by customer: " + amount);
-				description = "for " + nights + " nights";
 				System.out.println(description);
-
-				hotels.get(hotelNum).getReservations().getLast().getTransaction()
-						.add(new Transaction(amount, description));
 			}
 		}
 	}

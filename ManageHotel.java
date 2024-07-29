@@ -19,7 +19,7 @@ public class ManageHotel {
 			do {
 				System.out.println("Enter option:");
 				System.out.println(
-						"[1] Change Hotel Name\n[2] Add Rooms\n[3] Remove Rooms\n[4] Update Room Base Price\n[5] Remove Reservation\n[6] Remove Hotel\n[7] Exit\n");
+						"[1] Change Hotel Name\n[2] Add Rooms\n[3] Remove Rooms\n[4] Update Room Base Price\n[5] Remove Reservation\n[6] Remove Hotel\n[7] Edit date price modifier\n[8] Exit\n");
 
 				switch (option = Integer.parseInt(sc1.nextLine())) {
 					case 1:
@@ -41,6 +41,9 @@ public class ManageHotel {
 						removeHotel(hotels, viewHotelList(sc1, hotels));
 						break;
 					case 7:
+						editDPM(hotels, viewHotelList(sc1, hotels), sc1);
+						break;
+					case 8:
 						System.out.println("Exiting");
 						break;
 					default:
@@ -254,5 +257,56 @@ public class ManageHotel {
 		if (hotelNum >= 0)
 			hotels.remove(hotelNum);
 	}
-
+	
+	public void editDPM(ArrayList<Hotel> hotels, int hotelNum, Scanner scan) 
+	{
+		int loop = 0, day, percent, i;
+		String response;
+		if (hotelNum >= 0)
+		{
+			do {
+				System.out.println("Edit DPM? (y/n)");
+				response = scan.nextLine();
+				switch (response) 
+				{
+	                case "y":
+	                case "yes":
+	                case "YES":
+	                case "Y":
+	                	do {
+	                		System.out.println("What day of the month");
+		                	day = Integer.parseInt(scan.nextLine()) - 1;
+	                	} while(day + 1 > 31 || day + 1 < 1);
+	                	
+	                	do {
+	                		System.out.println("Scale by what percent");
+		                	percent = Integer.parseInt(scan.nextLine());
+		                	
+		                	if(percent < 50 || percent > 150)
+		                		System.out.println("Out of bounds");
+	                	} while(percent < 50 && percent > 150);
+	                	
+	                	hotels.get(hotelNum).getDPM()[day] = percent;
+	                	loop = 1;
+	                    break;
+	                case "no":
+	                case "N":
+	                case "NO":
+	                case "n":
+	                	loop = 0;
+	                    break;
+	                default:
+	                    System.out.println("error");
+	                    loop = 1;
+	                    break;
+				}
+			} while(loop == 1);
+			
+//			for(i = 0; i < hotels.get(hotelNum).getDPM().length; ++i)
+//			{
+//				System.out.print(i + 1 + " "); 
+//				System.out.println(hotels.get(hotelNum).getDPM()[i]);
+//			}
+		}
+	}
 }

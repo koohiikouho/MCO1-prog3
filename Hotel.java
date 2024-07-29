@@ -11,6 +11,7 @@ public class Hotel {
     private String name;
     ArrayList<Room> rooms = new ArrayList<Room>();
     private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+    private int[] DPM = new int[31];
     private BigDecimal earningsEstimate;
 
     /**
@@ -49,6 +50,11 @@ public class Hotel {
             for (int j = 0; j < roomPFloor.intValue(); ++j) {
                 rooms.add(new Room((i + 1), (j + 1)));
             }
+        }
+        
+        for(int i = 0; i < DPM.length; ++i)
+        {
+        	DPM[i] = 1;
         }
 
     }
@@ -123,6 +129,24 @@ public class Hotel {
         this.rooms = rooms;
     }
 
+    /**
+     * Gets the DPM list
+     * 
+     * @return returns DPM
+     */
+    public int[] getDPM() {
+        return DPM;
+    }
+    
+    /**
+     * Sets reservations
+     * 
+     * @param reservations reservation setter in array list format
+     */
+    public void setDPM(int[] DPM) {
+        this.DPM = DPM;
+    }
+    
     /**
      * Gets all the resevations
      * 
