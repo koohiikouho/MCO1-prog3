@@ -1,3 +1,5 @@
+package hotelgui;
+
 import java.util.*;
 
 /**
@@ -103,7 +105,7 @@ public class ViewHotel {
      * @param scan   scanner import
      * @param hotels hotel to get information from
      */
-    private void roomFree(Scanner scan, Hotel hotels) {
+    public void roomFree(Scanner scan, Hotel hotels) {
         try {
             // variable declarations
             Integer i, year, month, day;
@@ -145,6 +147,42 @@ public class ViewHotel {
 
         } catch (Exception e) {
             System.err.println("Error occured!");
+        }
+    }
+    
+    public String roomFreeRet(Integer year, Integer month, Integer day, Hotel hotels) {
+        String returner;
+        try {
+            // variable declarations
+            Integer i;
+
+            // change this to something simpler later
+            
+
+            // variable declarations again
+            int reserved = 0, free = 0;
+            Date inputDate = new Date(year.intValue(), month.intValue() - 1, day.intValue());
+            String dateString = year + "/" + month + "/" + day;
+
+            if (hotels.getReservations().size() != 0) {
+                for (i = 0; i < hotels.getReservations().size(); ++i) {
+                    if (hotels.getReservations().get(i).getCheckInDate().before(inputDate) &&
+                            hotels.getReservations().get(i).getCheckOutDate().after(inputDate)) {
+                        reserved++;
+                    }
+                }
+            }
+
+            free = hotels.rooms.size() - reserved;
+
+            
+            returner = "Reserved rooms during " + dateString + ": " + reserved + "\n" +
+            "Free rooms during " + dateString + ": " + free;
+            
+            return returner;
+        } catch (Exception e) {
+            System.err.println("Error occured!");
+            return null;
         }
     }
 
@@ -226,7 +264,72 @@ public class ViewHotel {
             }
         }
     }
+    
+    public String roomInfoRet(Integer floor, Integer number, Integer year, Integer month , Hotel hotels) {
+        month -= 1;
+        String returner;
+        int c1 = 0, c2 = 0;
+        // for loop shows all rooms in a hotel
+        System.out.println("Showing all rooms in " + hotels.getName() + "...");
+        for (int i = 0; i < hotels.getRooms().size(); ++i) {
+            System.out.println("[" + (i + 1) + "]" +
+                    hotels.getRooms().get(i).getRoomFloor() + "-"
+                    + hotels.getRooms().get(i).getRoomNumber());
+        }
 
+        // do while loops protect from misinputs
+        do {
+            if (c1 != 0) {
+                System.err.println("Enter Room value in range");
+            }
+
+            System.out.println("Enter room floor: ");
+            
+            c1++;
+        } while (floor > hotels.getRooms().getLast().getRoomFloor());
+        do {
+            if (c2 != 0) {
+                System.err.println("Enter Room value in range");
+            }
+
+            System.out.println("Enter room number on floor " + floor + " : ");
+            
+            c2++;
+        } while (number > hotels.getRooms().getLast().getRoomNumber());
+
+        // part 2 of roomInfo
+        Integer roomIndex = hotels.returnIndex(floor, number);
+        returner = "Room price: "
+                + hotels.getRooms().get(roomIndex).getBasePrice() +'\n';
+
+        
+
+        // instantiate date classes as search keys
+        Date afterDate = new Date(year.intValue(), month.intValue() - 1, 1);
+        Date beforeDate = new Date(year.intValue(), month.intValue() - 1, 31);
+        String dateString = year + "/"
+                + month;
+
+        returner += "Room " + floor + "-" + number + "'s info " + "during " + dateString + ": " + "\n";
+        returner += "Unavailable during: ";
+        // shows the reservations that are inside the month
+        if (hotels.getReservations().size() == 0) {
+            returner += "No reservations for hotel" +"\n";
+        } else {
+            for (int i = 0; i < hotels.getReservations().size(); ++i) {
+                if (hotels.getReservations().get(i).getRoom().getRoomFloor() == floor
+                        && hotels.getReservations().get(i).getRoom().getRoomNumber() == number) {
+                    if (afterDate.before(hotels.getReservations().get(i).getCheckInDate())
+                            && beforeDate.after(hotels.getReservations().get(i).getCheckInDate())) {
+                        
+                       returner += toDateString(hotels.getReservations().get(i), true) + " until "
+                                + toDateString(hotels.getReservations().get(i), false) + "\n";
+                    }
+                }
+            }
+        }
+        return returner;
+    }
     /**
      * reservationInfo is a method that allows a user to view all of the
      * reservations in a hotel using the , and . keys
@@ -272,6 +375,50 @@ public class ViewHotel {
             System.err.println("No reservation info available!");
         }
 
+    }
+    public String reservationInfoRet(ArrayList<Reservation> reservations) {
+        Character input = ' ';
+        Integer i = 0;
+        
+        try {
+            String returner = "\n";
+            for (i = 0; i < reservations.size(); i++) {
+                returner +=
+                        "Guest Name: " +
+                                reservations.get(i).getGuestName().getFirstName()
+                                + " " +
+                                reservations.get(i).getGuestName().getLastName() + "\n";
+                returner +="Room: " +
+                        reservations.get(i).getRoom().getRoomFloor()
+                        + '-' +
+                        reservations.get(i).getRoom().getRoomNumber() + "\n";
+                returner += "Check In Date: " + toDateString(reservations.get(i),
+                        true) +"\n";
+                returner +="Check Out Date: " + toDateString(reservations.get(i),
+                        false) + "\n";
+                for (int j = 0; j < reservations.get(i).getTransaction().size(); j++) {
+                    returner += reservations.get(i).getTransaction().get(j).getDescription() + " P"
+                            + reservations.get(i).getTransaction().get(j).getAmount() + "\n";
+                }
+                returner += "----------------------------------------------------\n";
+                returner += "Total " + reservations.get(i).getTransactionTotal() + "\n";
+                returner += ("\n");
+
+                // System.out.println("Enter '.' for next, ',' for back: , 'x' to exit");
+                // input = Character.toUpperCase(scan.nextLine().charAt(0));
+                // if (input == '.')
+                // i++;
+                // else if (input == ',') {
+                // i--;
+                // }
+            }
+            return returner;
+        } catch (Exception e) {
+            System.err.println("No reservation info available!");
+            return null;
+        }
+        
+        
     }
 
     /**

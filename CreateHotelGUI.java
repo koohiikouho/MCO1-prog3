@@ -9,11 +9,15 @@ package hotelgui;
  * @author EroZero
  */
 public class CreateHotelGUI extends javax.swing.JFrame {
-
+    static HRSYS mainClass;
+    String hotelNameStr;
+    Integer multRoomInt;
+    Integer multFloorInt;
     /**
      * Creates new form NewJFrame
      */
-    public CreateHotelGUI() {
+    public CreateHotelGUI(HRSYS modelClass) {
+        mainClass = modelClass;
         initComponents();
     }
 
@@ -27,45 +31,51 @@ public class CreateHotelGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
+        createHotel = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        hotelName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        numberOfRooms = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
+        numberOfFloors = new javax.swing.JTextField();
+        exitBut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton5.setText("Create Hotel");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        createHotel.setText("Create Hotel");
+        createHotel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        createHotel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                createHotelActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Hotel Reservation Management System");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        hotelName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                hotelNameActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Hotel name:");
 
+        numberOfRooms.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numberOfRoomsActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Number of Rooms:");
 
         jLabel4.setText("Number of Floors:");
 
-        jButton6.setText("Exit");
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        exitBut.setText("Exit");
+        exitBut.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        exitBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                exitButActionPerformed(evt);
             }
         });
 
@@ -76,9 +86,9 @@ public class CreateHotelGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(80, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exitBut, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(createHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -87,9 +97,9 @@ public class CreateHotelGUI extends javax.swing.JFrame {
                                 .addComponent(jLabel4))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField1)
-                                .addComponent(jTextField2)
-                                .addComponent(jTextField3)))))
+                                .addComponent(hotelName)
+                                .addComponent(numberOfRooms)
+                                .addComponent(numberOfFloors)))))
                 .addGap(63, 63, 63))
         );
         jPanel1Layout.setVerticalGroup(
@@ -99,20 +109,20 @@ public class CreateHotelGUI extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(74, 74, 74)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hotelName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numberOfRooms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numberOfFloors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(createHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(exitBut, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
         );
 
@@ -135,21 +145,39 @@ public class CreateHotelGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void createHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createHotelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+        hotelNameStr = hotelName.getText();
+        multRoomInt = Integer.parseInt(numberOfFloors.getText());
+        multFloorInt = Integer.parseInt(numberOfFloors.getText());
+        
+        Hotel currHot = new Hotel(hotelNameStr, multFloorInt, multRoomInt);
+        
+        System.out.println(currHot.getName());
+        mainClass.getHotel().add(currHot);
+        
+        MenuGUI menu = new MenuGUI(mainClass);
+        menu.show();
+        dispose();
+        
+    }//GEN-LAST:event_createHotelActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void hotelNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotelNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_hotelNameActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void exitButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButActionPerformed
         // TODO add your handling code here:
-        MenuGUI menu = new MenuGUI();
+        MenuGUI menu = new MenuGUI(mainClass);
         menu.show();
         
         dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_exitButActionPerformed
+
+    private void numberOfRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberOfRoomsActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_numberOfRoomsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,21 +216,23 @@ public class CreateHotelGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateHotelGUI().setVisible(true);
+                new CreateHotelGUI(mainClass).setVisible(true);
             }
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton createHotel;
+    private javax.swing.JButton exitBut;
+    private javax.swing.JTextField hotelName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField numberOfFloors;
+    private javax.swing.JTextField numberOfRooms;
     // End of variables declaration//GEN-END:variables
 }
