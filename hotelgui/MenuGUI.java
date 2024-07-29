@@ -147,7 +147,7 @@ public class MenuGUI extends javax.swing.JFrame {
 
     private void simulateBookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateBookingButtonActionPerformed
         // TODO add your handling code here:
-        SimBook1 daSims = new SimBook1();
+        SimBook1 daSims = new SimBook1(mainClass);
         
         daSims.show();
         dispose();

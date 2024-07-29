@@ -9,12 +9,17 @@ package hotelgui;
  * @author EroZero
  */
 public class SimBook1 extends javax.swing.JFrame {
-
+    
+    static HRSYS mainClass;
     /**
      * Creates new form NewJFrame
      */
-    public SimBook1() {
+    public SimBook1(HRSYS mainClass) {
+        this.mainClass = mainClass;
         initComponents();
+        
+        for(int i = 0; i < this.mainClass.getHotel().size() ; ++i)
+            showHotels.append( "[" + (i + 1) + "] " +  this.mainClass.getHotel().get(i).getName() + "\n");
     }
 
     /**
@@ -29,10 +34,10 @@ public class SimBook1 extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        searchRooms = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jTextField3 = new javax.swing.JTextField();
+        showHotels = new javax.swing.JTextArea();
+        hotelNum = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,23 +52,22 @@ public class SimBook1 extends javax.swing.JFrame {
             }
         });
 
-        jButton9.setText("Search Rooms");
-        jButton9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        searchRooms.setText("Search Rooms");
+        searchRooms.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        searchRooms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                searchRoomsActionPerformed(evt);
             }
         });
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        showHotels.setEditable(false);
+        showHotels.setColumns(20);
+        showHotels.setRows(5);
+        jScrollPane1.setViewportView(showHotels);
 
-        jTextField3.setText("Hotel Number");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        hotelNum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                hotelNumActionPerformed(evt);
             }
         });
 
@@ -85,11 +89,11 @@ public class SimBook1 extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
+                                    .addComponent(searchRooms, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(hotelNum, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(63, 63, 63))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -102,9 +106,9 @@ public class SimBook1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(hotelNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchRooms, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
@@ -131,24 +135,28 @@ public class SimBook1 extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        MenuGUI menu = new MenuGUI();
+        MenuGUI menu = new MenuGUI(mainClass);
         menu.show();
-
         dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void searchRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchRoomsActionPerformed
         // TODO add your handling code here:
         
-        SimBook2 rmvres = new SimBook2();
-        rmvres.show();
+        Integer hotelNumber = Integer.parseInt(hotelNum.getText());
+        
+        Hotel hotel = mainClass.getHotel().get(hotelNumber - 1);
+        SimBook2 daSims = new SimBook2(mainClass);
+        daSims.setHotel(hotel);
+        daSims.show();
+        
         dispose();
         
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_searchRoomsActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void hotelNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotelNumActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_hotelNumActionPerformed
 
     /**
      * @param args the command line arguments
@@ -691,19 +699,19 @@ public class SimBook1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SimBook1().setVisible(true);
+                new SimBook1(mainClass).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField hotelNum;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton searchRooms;
+    private javax.swing.JTextArea showHotels;
     // End of variables declaration//GEN-END:variables
 }
