@@ -54,7 +54,7 @@ public class Hotel {
         
         for(int i = 0; i < DPM.length; ++i)
         {
-        	DPM[i] = 1;
+        	DPM[i] = 100;
         }
 
     }

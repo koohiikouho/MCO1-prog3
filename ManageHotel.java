@@ -50,7 +50,7 @@ public class ManageHotel {
 						System.err.println("Input out of bounds");
 						break;
 				}
-			} while (option != 7);
+			} while (option != 8);
 		} catch (Exception e) {
 			System.out.println("Invalid input!!");
 		}

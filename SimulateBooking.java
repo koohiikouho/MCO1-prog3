@@ -192,9 +192,12 @@ public class SimulateBooking {
 						+ hotels.get(hotelNum).getReservations().getLast().getCheckOutDate().getDate() + " "
 						+ hotels.get(hotelNum).getReservations().getLast().getCheckOutDate().getHours() + ":"
 						+ hotels.get(hotelNum).getReservations().getLast().getCheckOutDate().getMinutes());
-
+				
 				Date checkOutTemp = checkOutDate;
 				Date checkInTemp = checkInDate;
+				
+				Date checkOutTemp2 = new Date(checkOutDate.getYear(), checkOutDate.getMonth(), checkOutDate.getDate());
+				Date checkInTemp2 = new Date(checkInDate.getYear(), checkInDate.getMonth(), checkInDate.getDate());
 				long o;
 				long nights = (checkOutTemp.getTime() - checkInTemp.getTime()) / 86400000;
 				int a = checkInTemp.getDate();
@@ -203,9 +206,10 @@ public class SimulateBooking {
 				
 				for(o = 0; o < nights; ++o)
 				{
-					BigDecimal multiply = new BigDecimal(hotels.get(hotelNum).getDPM()[a - 1] / 100);
+					BigDecimal multiply = new BigDecimal(hotels.get(hotelNum).getDPM()[a - 1] / 100.000);
 					BigDecimal amount = hotels.get(hotelNum).rooms.get(roomNum).getBasePrice();
 					amount = amount.multiply(multiply);
+					System.out.println(amount);
 					hotels.get(hotelNum).getReservations().getLast().getTransaction().add(new Transaction(amount, description));
 					a++;
 				}
@@ -234,6 +238,10 @@ public class SimulateBooking {
 			                			hotels.get(hotelNum).getReservations().getLast().getTransaction().get(i).setDescription(tempDescript.concat("discount1 "));
 			                		}
 		                		}
+		                		else
+			    				{
+			    					System.out.println("Discount already applied");
+			    				}
 		    				}
 		    				else if(discount.compareTo("STAY4_GET1") == 0)
 		    				{
@@ -252,35 +260,38 @@ public class SimulateBooking {
 			    					else
 				    				{
 				    					System.out.println("Sorry you are not eligible for this discount");
-				    					loop = 1;
 				    				}
 		                		}
+		    					else
+			    				{
+			    					System.out.println("Discount already applied");
+			    				}
 		    				}
 		    				else if(discount.compareTo("PAYDAY") == 0)
 		    				{
 		    					if(hotels.get(hotelNum).getReservations().getLast().getTransaction().getFirst().getDescription().contains("discount3") == false)
 		                		{
-			    					Date in15 = new Date(checkInTemp.getYear(), checkInTemp.getDate(), 15);
-			    					Date in30 = new Date(checkInTemp.getYear(), checkInTemp.getDate(), 30);
-			    					Date out15 = new Date(checkOutTemp.getYear(), checkOutTemp.getDate(), 15);
-			    					Date out30 = new Date(checkOutTemp.getYear(), checkOutTemp.getDate(), 30);
+			    					Date in15 = new Date(checkInTemp.getYear(), checkInTemp.getMonth(), 15);
+			    					Date in30 = new Date(checkInTemp.getYear(), checkInTemp.getMonth(), 30);
+			    					Date out15 = new Date(checkOutTemp.getYear(), checkOutTemp.getMonth(), 15);
+			    					Date out30 = new Date(checkOutTemp.getYear(), checkOutTemp.getMonth(), 30);
 			    					
-			    					if(checkInTemp.getTime() < in15.getTime())
+			    					if(checkInTemp2.getTime() < in15.getTime())
 			    					{
-			    						if(checkOutTemp.getTime() >= in15.getTime())
+			    						if(checkOutTemp2.getTime() >= in15.getTime())
 			    							pass = 1;
 			    					}
-			    					else if (checkInTemp.getTime() == in15.getTime() || checkInTemp.getTime() == in30.getTime() || checkInTemp.getTime() == out15.getTime() || checkInTemp.getTime() == out30.getTime())
+			    					else if (checkInTemp2.getTime() == in15.getTime() || checkInTemp2.getTime() == in30.getTime() || checkInTemp2.getTime() == out15.getTime() || checkInTemp2.getTime() == out30.getTime())
 			    					{
 			    						pass = 1;
 			    					}
-			    					else if (checkOutTemp.getTime() == out15.getTime() || checkOutTemp.getTime() == out30.getTime() || checkOutTemp.getTime() == in15.getTime() || checkOutTemp.getTime() == in30.getTime())
+			    					else if (checkOutTemp2.getTime() == out15.getTime() || checkOutTemp2.getTime() == out30.getTime() || checkOutTemp2.getTime() == in15.getTime() || checkOutTemp2.getTime() == in30.getTime())
 			    					{
 			    						pass = 1;
 			    					}
-			    					else if(checkInTemp.getTime() < in30.getTime())
+			    					else if(checkInTemp2.getTime() < in30.getTime())
 			    					{
-			    						if(checkOutTemp.getTime() >= in30.getTime())
+			    						if(checkOutTemp2.getTime() >= in30.getTime())
 			    							pass = 1;
 			    					}
 			    					
@@ -297,10 +308,14 @@ public class SimulateBooking {
 			    					else
 				    				{
 				    					System.out.println("Sorry you are not eligible for this discount");
-				    					loop = 1;
 				    				}
 		                		}
+		    					else
+			    				{
+			    					System.out.println("Discount already applied");
+			    				}
 		    				}
+		                	loop = 1;
 		                    break;
 		                case "no":
 		                case "N":
@@ -315,10 +330,10 @@ public class SimulateBooking {
 					}
 				} while(loop == 1);
 				
-				BigDecimal amount = new BigDecimal(0);
+				BigDecimal amount = new BigDecimal(0.00);
 				for(i = 0; i < hotels.get(hotelNum).getReservations().getLast().getTransaction().size(); ++i)
         		{
-        			amount.add(hotels.get(hotelNum).getReservations().getLast().getTransaction().get(i).getAmount());
+        			amount = amount.add(hotels.get(hotelNum).getReservations().getLast().getTransaction().get(i).getAmount());
         		}
 				
 				System.out.println("Amount to be paid by customer: " + amount);
