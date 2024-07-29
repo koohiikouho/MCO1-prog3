@@ -165,7 +165,7 @@ public class MenuGUI extends javax.swing.JFrame {
 
     private void manageHotelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageHotelButtonActionPerformed
         // TODO add your handling code here:
-        ManageHotelGUI manHotel = new ManageHotelGUI();
+        ManageHotelGUI manHotel = new ManageHotelGUI(mainClass);
         
         manHotel.show();
         dispose();
