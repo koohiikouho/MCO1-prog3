@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class Controller {
     
-    static HRSYS mainClass = new HRSYS();
+    private static HRSYS mainClass = new HRSYS();
     
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);

@@ -10,8 +10,8 @@ package hotelgui;
  */
 public class LowLevel extends javax.swing.JFrame {
     
-    static HRSYS mainClass;
-    Hotel hotel;
+    private static HRSYS mainClass;
+    private Hotel hotel;
     
     /**
      * Creates new form NewJFrame

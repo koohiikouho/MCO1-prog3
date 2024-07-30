@@ -13,7 +13,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  */
 public class ViewHotelGUI extends javax.swing.JFrame {
 
-    static HRSYS mainClass;
+    private static HRSYS mainClass;
     /**
      * Creates new form NewJFrame
      */

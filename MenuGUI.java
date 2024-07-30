@@ -10,7 +10,7 @@ package hotelgui;
  */
 public class MenuGUI extends javax.swing.JFrame {
     
-    static HRSYS mainClass;
+    private static HRSYS mainClass;
     /**
      * Creates new form NewJFrame
      */
