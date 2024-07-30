@@ -9,11 +9,13 @@ package hotelgui;
  * @author EroZero
  */
 public class RemoveReserv2 extends javax.swing.JFrame {
-
+    
+    private static HRSYS mainClass;
     /**
      * Creates new form NewJFrame
      */
-    public RemoveReserv2() {
+    public RemoveReserv2(HRSYS mainClass) {
+        this.mainClass = mainClass;
         initComponents();
     }
 
@@ -130,7 +132,7 @@ public class RemoveReserv2 extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        MenuGUI menu = new MenuGUI();
+        MenuGUI menu = new MenuGUI(mainClass);
         menu.show();
 
         dispose();
@@ -4271,7 +4273,7 @@ public class RemoveReserv2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RemoveReserv2().setVisible(true);
+                new RemoveReserv2(mainClass).setVisible(true);
             }
         });
     }

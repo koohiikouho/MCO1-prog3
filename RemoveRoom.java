@@ -9,8 +9,8 @@ package hotelgui;
  * @author EroZero
  */
 public class RemoveRoom extends javax.swing.JFrame {
-	static HRSYS mainClass;
-	int hotelNum, roomNum, floorNum;
+	private static HRSYS mainClass;
+	private int hotelNum, roomNum, floorNum;
 	/**
      * Creates new form NewJFrame
      */

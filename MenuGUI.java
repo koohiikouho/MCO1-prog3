@@ -135,7 +135,10 @@ public class MenuGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * method opens CreateHotelGUI
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         CreateHotelGUI creator = new CreateHotelGUI(mainClass);
@@ -144,7 +147,11 @@ public class MenuGUI extends javax.swing.JFrame {
         dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    /**
+     * method opens simulateBookingGUI
+     * @param evt 
+     */
     private void simulateBookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateBookingButtonActionPerformed
         // TODO add your handling code here:
         SimBook1 daSims = new SimBook1(mainClass);
@@ -153,7 +160,11 @@ public class MenuGUI extends javax.swing.JFrame {
         dispose();
         
     }//GEN-LAST:event_simulateBookingButtonActionPerformed
-
+    
+    /**
+     * method opens viewHotelGUI
+     * @param evt 
+     */
     private void viewHotelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewHotelButtonActionPerformed
         // TODO add your handling code here:
         
@@ -162,7 +173,11 @@ public class MenuGUI extends javax.swing.JFrame {
         view.show();
         dispose();
     }//GEN-LAST:event_viewHotelButtonActionPerformed
-
+    
+    /**
+     * method opens manage hotel GUI
+     * @param evt 
+     */
     private void manageHotelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageHotelButtonActionPerformed
         // TODO add your handling code here:
         ManageHotelGUI manHotel = new ManageHotelGUI(mainClass);
@@ -170,10 +185,14 @@ public class MenuGUI extends javax.swing.JFrame {
         manHotel.show();
         dispose();
     }//GEN-LAST:event_manageHotelButtonActionPerformed
-
+    /**
+     * method closes program
+     * @param evt 
+     */
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         dispose();
+        System.exit(0);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

@@ -9,7 +9,7 @@ package hotelgui;
  * @author EroZero
  */
 public class RemoveRooms2 extends javax.swing.JFrame {
-	static HRSYS mainClass;
+	private static HRSYS mainClass;
     /**
      * Creates new form NewJFrame
      */
@@ -455,7 +455,7 @@ public class RemoveRooms2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RemoveRooms2().setVisible(true);
+                new RemoveRooms2(mainClass).setVisible(true);
             }
         });
     }
