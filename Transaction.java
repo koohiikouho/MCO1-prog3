@@ -1,3 +1,5 @@
+package hotelgui;
+
 import java.math.BigDecimal;
 
 /**

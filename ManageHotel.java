@@ -1,3 +1,5 @@
+package hotelgui;
+
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -5,7 +7,7 @@ import java.util.*;
  * ManageHotel is a method class to manage the Hotel thorough different options
  */
 public class ManageHotel {
-
+    
 	/**
 	 * optionSel acts as the main method, it contains methods
 	 * to manage the hotel

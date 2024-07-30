@@ -1,3 +1,5 @@
+package hotelgui;
+
 import java.util.*;
 
 public class HRSYS {
@@ -52,6 +54,10 @@ public class HRSYS {
      */
     public void createHotel(Scanner scan) { // calls the hotel constructor to add a hotel to the array list
         hotels.add(new Hotel(scan));
+    }
+    
+    public ArrayList<Hotel> getHotel(){
+        return hotels;
     }
 
 }

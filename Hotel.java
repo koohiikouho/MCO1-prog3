@@ -1,3 +1,5 @@
+package hotelgui;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.math.BigDecimal;
@@ -46,6 +48,24 @@ public class Hotel {
             count++;
         } while (roomPFloor * floors > 50);
 
+        for (int i = 0; i < floors.intValue(); ++i) {
+            for (int j = 0; j < roomPFloor.intValue(); ++j) {
+                rooms.add(new Room((i + 1), (j + 1)));
+            }
+        }
+        
+        for(int i = 0; i < DPM.length; ++i)
+        {
+        	DPM[i] = 100;
+        }
+
+    }
+    
+    public Hotel(String name, Integer floors, Integer roomPFloor) {
+
+        // variable declarations
+        
+        this.name = name;
         for (int i = 0; i < floors.intValue(); ++i) {
             for (int j = 0; j < roomPFloor.intValue(); ++j) {
                 rooms.add(new Room((i + 1), (j + 1)));

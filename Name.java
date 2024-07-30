@@ -1,3 +1,5 @@
+package hotelgui;
+
 
 /**
  * This class is a data class that aggregates the first name and the last name!
