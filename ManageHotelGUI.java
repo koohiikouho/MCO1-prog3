@@ -225,16 +225,14 @@ public class ManageHotelGUI extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-//        RemoveHotel remHot = new RemoveHotel(mainClass);
-//        
-//        remHot.show();
+    	DatePriceModifier changeDPM = new DatePriceModifier(mainClass);
+    	changeDPM.show();
         dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-    	RemoveHotel remHot = new RemoveHotel(mainClass);
-        
+        RemoveHotel remHot = new RemoveHotel(mainClass);
         remHot.show();
         dispose();
     }//GEN-LAST:event_jButton8ActionPerformed

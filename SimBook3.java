@@ -30,7 +30,11 @@ public class SimBook3 extends javax.swing.JFrame {
         initComponents(hotelNum);
     }
     
-    public void setHotel(Hotel hotel){
+    public SimBook3(HRSYS mainClass2) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setHotel(Hotel hotel){
         this.hotel = hotel;
     }
     
@@ -274,6 +278,7 @@ public class SimBook3 extends javax.swing.JFrame {
     	
     	Name guestName = new Name(fName, lName);
     	int index = 0;
+    	int pass = 0;
     	
     	Integer floor = Integer.parseInt(textField.getText());
     	Integer room = Integer.parseInt(textField_7.getText());
@@ -284,6 +289,13 @@ public class SimBook3 extends javax.swing.JFrame {
     	hour1 =  Integer.parseInt(hour.getText());
     	min1 = Integer.parseInt(minute.getText());
     	
+    	if(month1 > 0 && month1 < 13 && year1 >= 2024 && year1 <= 2050 && day1 >= 1 && day1 <=31 && hour1 >= 0 && hour1 <= 23 && min1 >= 0 && min1 <= 59)
+        {
+    		pass = 1;
+        }
+    	else
+    		pass = 0;
+    	
     	Date checkInDate = new Date(year1, month1 - 1, day1, hour1, min1);
     	
     	year1 = Integer.parseInt(textField_3.getText());
@@ -292,25 +304,41 @@ public class SimBook3 extends javax.swing.JFrame {
     	hour1 =  Integer.parseInt(chour.getText());
     	min1 = Integer.parseInt(cmin.getText());
     	
+    	if(month1 > 0 && month1 < 13 && year1 >= 2024 && year1 <= 2050 && day1 >= 1 && day1 <=31 && hour1 >= 0 && hour1 <= 23 && min1 >= 0 && min1 <= 59)
+        {
+    		pass = 1;
+        }
+    	else
+    		pass = 0;
+    	
     	Date checkOutDate = new Date(year1, month1 - 1, day1, hour1, min1);
     	
-    	for(int i = 0; i < this.mainClass.getHotel().get(hotelNum).rooms.size(); ++i)
+    	if(checkInDate.getTime() < checkOutDate.getTime())
     	{
-    		if(this.mainClass.getHotel().get(hotelNum).rooms.get(i).getRoomFloor() == floor)
-    		{
-    			if(this.mainClass.getHotel().get(hotelNum).rooms.get(i).getRoomNumber() == room)
-    			{
-    				index = i;
-    				this.mainClass.getHotel().get(hotelNum).getReservations().add(new Reservation(guestName, checkInDate, checkOutDate, this.mainClass.getHotel().get(hotelNum).rooms.get(i))); 
-    			}
-    		}
+    		pass = 1;
     	}
+    	else
+    		pass = 0;
     	
-        SimBook4 showReceipt = new SimBook4(mainClass, hotelNum, index);
-        
-        showReceipt.show();
-        dispose();
-        
+    	if(pass == 1)
+    	{
+    		for(int i = 0; i < this.mainClass.getHotel().get(hotelNum).rooms.size(); ++i)
+        	{
+        		if(this.mainClass.getHotel().get(hotelNum).rooms.get(i).getRoomFloor() == floor)
+        		{
+        			if(this.mainClass.getHotel().get(hotelNum).rooms.get(i).getRoomNumber() == room)
+        			{
+        				index = i;
+        				this.mainClass.getHotel().get(hotelNum).getReservations().add(new Reservation(guestName, checkInDate, checkOutDate, this.mainClass.getHotel().get(hotelNum).rooms.get(i))); 
+        			}
+        		}
+        	}
+        	
+            SimBook4 showReceipt = new SimBook4(mainClass, hotelNum, index);
+            
+            showReceipt.show();
+            dispose();
+    	}
         
     }//GEN-LAST:event_bookButtActionPerformed
 

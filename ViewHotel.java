@@ -307,8 +307,10 @@ public class ViewHotel {
                 + month;
 
         Integer roomIndex = hotels.returnIndex(floor, number);
+        BigDecimal presyo = hotels.getRooms().get(roomIndex).getBasePrice().multiply(new BigDecimal(hotels.getDPM()[day.intValue() - 1] / 100.00));
+        presyo = presyo.setScale(2, BigDecimal.ROUND_HALF_UP);
         returner = "Room price: "
-                + hotels.getRooms().get(roomIndex).getBasePrice().multiply(new BigDecimal(hotels.getDPM()[day.intValue() - 1] / 100.00)) +'\n';
+                + presyo +'\n';
         
         returner += "Room " + floor + "-" + number + "'s info " + "during " + dateString + ": " + "\n";
         returner += "Unavailable during: ";

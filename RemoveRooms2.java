@@ -21,6 +21,10 @@ public class RemoveRooms2 extends javax.swing.JFrame {
         
     }
 
+	public RemoveRooms2() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

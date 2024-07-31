@@ -346,7 +346,7 @@ public class SimulateBooking {
 	}
         
 	public void simBookingRet(Integer hotelNum, Integer roomNum, Integer day, Integer month, Integer year, Integer hour, Integer min, ArrayList<Hotel> hotels,
-        String fName, String lName,Integer cday, Integer cmonth, Integer cyear, Integer chour, Integer cmin) {
+        String fName, String lName,Integer cday, Integer cmonth, Integer cyear, Integer chour, Integer cmin, Scanner scan) {
 
 		// variable declarations
 		int i, loop = 0, pass = 0;

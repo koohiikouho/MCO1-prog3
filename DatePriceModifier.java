@@ -92,7 +92,7 @@ public class DatePriceModifier extends javax.swing.JFrame {
         jLabel4.setText("Hotel Number:");
         
         JLabel jLabel2_1 = new JLabel();
-        jLabel2_1.setText("New Price: ");
+        jLabel2_1.setText("New Percentage: ");
         
         textField = new JTextField();
 
@@ -187,13 +187,14 @@ public class DatePriceModifier extends javax.swing.JFrame {
     	hotelNum = Integer.parseInt(jTextField3.getText()) - 1;
         day = Integer.parseInt(jTextField1.getText()) - 1;
         int percent = Integer.parseInt(jTextField1.getText());
-    	
         
-        
-        this.mainClass.getHotel().get(hotelNum).getDPM()[day] = percent;
-        MenuGUI menu = new MenuGUI(mainClass);
-        menu.show();
-        dispose();
+        if(percent <= 150 && percent >= 50)
+        {
+        	this.mainClass.getHotel().get(hotelNum).getDPM()[day] = percent;
+		    MenuGUI menu = new MenuGUI(mainClass);
+		    menu.show();
+		    dispose();
+        }
         
     }//GEN-LAST:event_addButActionPerformed
 

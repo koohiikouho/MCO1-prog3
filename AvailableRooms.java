@@ -204,7 +204,11 @@ public class AvailableRooms extends javax.swing.JFrame {
         Integer mnth = Integer.parseInt(month.getText());
         Integer day2 = Integer.parseInt(day.getText());
         
-        showRooms.append(hotelViewer.roomFreeRet(yr, mnth, day2, hotel));
+        if(mnth > 0 && mnth < 13 && yr >= 2024 && yr <= 2050 && day2 >= 1 && day2 <=31)
+        {
+        	showRooms.append(hotelViewer.roomFreeRet(yr, mnth, day2, hotel));
+        }
+        
     }//GEN-LAST:event_searchRoomsActionPerformed
 
     private void yearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearActionPerformed

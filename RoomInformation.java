@@ -23,7 +23,7 @@ public class RoomInformation extends javax.swing.JFrame {
 
             hotel = hotelChosen;
             for(int i = 0; i < hotel.getRooms().size(); ++i)
-                rooms.append("[" + (i + 1) + "]" + hotel.getRooms().get(i).getRoomFloor() + " - " + hotel.getRooms().get(i).getRoomNumber() + "\n" );
+                rooms.append("[" + (i + 1) + "]" + "\t" + hotel.getRooms().get(i).getRoomFloor() + " - " + hotel.getRooms().get(i).getRoomNumber() + "\n" );
         }
 
     /**
@@ -276,10 +276,12 @@ public class RoomInformation extends javax.swing.JFrame {
         mnth = Integer.parseInt(month.getText());
         dy = Integer.parseInt(date.getText());
         
-        ViewHotel viewer = new ViewHotel();
-        
-        info.setText(viewer.roomInfoRet(flr, rm, yr, mnth, dy, hotel));
-        
+        if(mnth > 0 && mnth < 13 && yr >= 2024 && yr <= 2050 && dy >= 1 && dy <=31)
+        {
+	        ViewHotel viewer = new ViewHotel();
+	        
+	        info.setText(viewer.roomInfoRet(flr, rm, yr, mnth, dy, hotel));
+        }
         
     }//GEN-LAST:event_jButton9ActionPerformed
 

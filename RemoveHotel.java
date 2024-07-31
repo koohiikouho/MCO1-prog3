@@ -15,7 +15,7 @@ public class RemoveHotel extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public RemoveHotel(HRSYS modelClass) {
-    	this.mainClass = mainClass;
+    	this.mainClass = modelClass;
         initComponents();
         for(int i = 0; i < mainClass.getHotel().size(); ++i)
         	jTextArea1.append( "[" + (i + 1) + "]" + mainClass.getHotel().get(i).getName() + "\n");
