@@ -9,12 +9,16 @@ package hotelgui;
  * @author EroZero
  */
 public class RemoveReserv1 extends javax.swing.JFrame {
-
+	static HRSYS mainClass;
     /**
      * Creates new form NewJFrame
      */
-    public RemoveReserv1() {
+    public RemoveReserv1(HRSYS mainClass) {
+    	this.mainClass = mainClass;
         initComponents();
+        
+        for(int i = 0; i < mainClass.getHotel().size(); ++i)
+        	jTextArea1.append( "[" + (i + 1) + "]" + mainClass.getHotel().get(i).getName() + "\n");
     }
 
     /**
@@ -59,8 +63,6 @@ public class RemoveReserv1 extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
-
-        jTextField3.setText("Hotel Number");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -131,7 +133,7 @@ public class RemoveReserv1 extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        MenuGUI menu = new MenuGUI();
+        MenuGUI menu = new MenuGUI(mainClass);
         menu.show();
 
         dispose();
@@ -139,8 +141,11 @@ public class RemoveReserv1 extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        
-        RemoveReserv2 rmvres = new RemoveReserv2();
+    	Integer hotelInd = Integer.parseInt(jTextField3.getText()) - 1;
+    	
+//    	this.mainClass.getHotel().get(hotelInd);
+    	
+        RemoveReserv2 rmvres = new RemoveReserv2(mainClass, hotelInd);
         rmvres.show();
         dispose();
         
@@ -435,7 +440,7 @@ public class RemoveReserv1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RemoveReserv1().setVisible(true);
+                new RemoveReserv1(mainClass).setVisible(true);
             }
         });
     }

@@ -4,6 +4,8 @@
  */
 package hotelgui;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author EroZero
@@ -16,6 +18,9 @@ public class ChangeBasePrice extends javax.swing.JFrame {
     public ChangeBasePrice(HRSYS modelClass) {
     	 mainClass = modelClass;
         initComponents();
+        
+        for(int i = 0; i < mainClass.getHotel().size(); ++i)
+        	jTextArea1.append( "[" + (i + 1) + "]" + mainClass.getHotel().get(i).getName() + "\n");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -137,6 +142,25 @@ public class ChangeBasePrice extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+    	Integer hotelInd = Integer.parseInt(jTextField1.getText()) - 1;
+    	Integer money = Integer.parseInt(jTextField2.getText());
+    	
+    	if(money >= 100) 
+        {
+            BigDecimal price = new BigDecimal(money);
+            
+            if (this.mainClass.getHotel().get(hotelInd).getReservations().size() > 0)
+                System.out.println("Cannont change the price while there are reservations still in place");
+            else
+            {
+            	 for (int i = 0; i < mainClass.getHotel().get(hotelInd).getRooms().size(); ++i)
+                 	this.mainClass.getHotel().get(hotelInd).getRooms().get(i).setBasePrice(price);
+            	
+            	MenuGUI menu = new MenuGUI(mainClass);
+                menu.show();
+                dispose();
+            }
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -212,7 +236,7 @@ public class ChangeBasePrice extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChangeBasePrice(mainClass).setVisible(true);
+                new ChangeBasePrice().setVisible(true);
             }
         });
     }

@@ -155,7 +155,7 @@ public class SimBook2 extends javax.swing.JFrame {
     private void bookReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookReservationActionPerformed
         // TODO add your handling code here:
         
-        Integer roomNum = Integer.parseInt( roomNumber.getText() ) - 1;
+        Integer roomNum = Integer.parseInt(roomNumber.getText() ) - 1;
         Room room = hotel.getRooms().get(roomNum);
         SimBook3 daSims3 = new SimBook3(mainClass);
         daSims3.setHotel(hotel);

@@ -1,5 +1,6 @@
 package hotelgui;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -265,7 +266,7 @@ public class ViewHotel {
         }
     }
     
-    public String roomInfoRet(Integer floor, Integer number, Integer year, Integer month , Hotel hotels) {
+    public String roomInfoRet(Integer floor, Integer number, Integer year, Integer month, Integer day, Hotel hotels) {
         month -= 1;
         String returner;
         int c1 = 0, c2 = 0;
@@ -298,11 +299,6 @@ public class ViewHotel {
         } while (number > hotels.getRooms().getLast().getRoomNumber());
 
         // part 2 of roomInfo
-        Integer roomIndex = hotels.returnIndex(floor, number);
-        returner = "Room price: "
-                + hotels.getRooms().get(roomIndex).getBasePrice() +'\n';
-
-        
 
         // instantiate date classes as search keys
         Date afterDate = new Date(year.intValue(), month.intValue() - 1, 1);
@@ -310,6 +306,10 @@ public class ViewHotel {
         String dateString = year + "/"
                 + month;
 
+        Integer roomIndex = hotels.returnIndex(floor, number);
+        returner = "Room price: "
+                + hotels.getRooms().get(roomIndex).getBasePrice().multiply(new BigDecimal(hotels.getDPM()[day.intValue() - 1] / 100.00)) +'\n';
+        
         returner += "Room " + floor + "-" + number + "'s info " + "during " + dateString + ": " + "\n";
         returner += "Unavailable during: ";
         // shows the reservations that are inside the month

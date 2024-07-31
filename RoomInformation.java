@@ -9,8 +9,8 @@ package hotelgui;
  * @author EroZero
  */
 public class RoomInformation extends javax.swing.JFrame {
-    private static HRSYS mainClass;
-    private Hotel hotel;
+    static HRSYS mainClass;
+    Hotel hotel;
     /**
      * Creates new form NewJFrame
      */
@@ -278,7 +278,7 @@ public class RoomInformation extends javax.swing.JFrame {
         
         ViewHotel viewer = new ViewHotel();
         
-        info.setText(viewer.roomInfoRet(flr, rm, mnth, yr, hotel));
+        info.setText(viewer.roomInfoRet(flr, rm, yr, mnth, dy, hotel));
         
         
     }//GEN-LAST:event_jButton9ActionPerformed

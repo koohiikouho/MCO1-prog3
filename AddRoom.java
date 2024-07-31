@@ -9,8 +9,8 @@ package hotelgui;
  * @author EroZero
  */
 public class AddRoom extends javax.swing.JFrame {
-    private static HRSYS mainClass;
-    private int hotelNum, roomNum, floorNum;
+    static HRSYS mainClass;
+    int hotelNum, roomNum, floorNum;
     /**
      * Creates new form NewJFrame
      */

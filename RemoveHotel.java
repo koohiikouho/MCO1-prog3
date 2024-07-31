@@ -10,12 +10,15 @@ package hotelgui;
  */
 public class RemoveHotel extends javax.swing.JFrame {
 	static HRSYS mainClass;
+	int hotelNum;
     /**
      * Creates new form NewJFrame
      */
     public RemoveHotel(HRSYS modelClass) {
-    	mainClass = modelClass;
+    	this.mainClass = mainClass;
         initComponents();
+        for(int i = 0; i < mainClass.getHotel().size(); ++i)
+        	jTextArea1.append( "[" + (i + 1) + "]" + mainClass.getHotel().get(i).getName() + "\n");
     }
 
     /**
@@ -57,8 +60,6 @@ public class RemoveHotel extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-
-        jTextField2.setText("Hotel Number");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -138,8 +139,13 @@ public class RemoveHotel extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+    	hotelNum = Integer.parseInt(jTextField2.getText()) - 1;
+    	
+    	this.mainClass.getHotel().remove(hotelNum);
         
-        
+    	MenuGUI menu = new MenuGUI(mainClass);
+        menu.show();
+        dispose();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed

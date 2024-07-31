@@ -17,44 +17,35 @@ public class ManageHotel {
 	public void optionSel(ArrayList<Hotel> hotels) {
 		int option = 0;
 		Scanner sc1 = new Scanner(System.in);
-		try {
-			do {
-				System.out.println("Enter option:");
-				System.out.println(
-						"[1] Change Hotel Name\n[2] Add Rooms\n[3] Remove Rooms\n[4] Update Room Base Price\n[5] Remove Reservation\n[6] Remove Hotel\n[7] Edit date price modifier\n[8] Exit\n");
 
-				switch (option = Integer.parseInt(sc1.nextLine())) {
-					case 1:
-						changeHotelName(sc1, hotels, viewHotelList(sc1, hotels));
-						break;
-					case 2:
-						addRooms(sc1, hotels, viewHotelList(sc1, hotels));
-						break;
-					case 3:
-						removeRooms(sc1, hotels, viewHotelList(sc1, hotels));
-						break;
-					case 4:
-						updateRoomPrice(sc1, hotels, viewHotelList(sc1, hotels));
-						break;
-					case 5:
-						removeReservation(sc1, hotels, viewHotelList(sc1, hotels));
-						break;
-					case 6:
-						removeHotel(hotels, viewHotelList(sc1, hotels));
-						break;
-					case 7:
-						editDPM(hotels, viewHotelList(sc1, hotels), sc1);
-						break;
-					case 8:
-						System.out.println("Exiting");
-						break;
-					default:
-						System.err.println("Input out of bounds");
-						break;
-				}
-			} while (option != 8);
-		} catch (Exception e) {
-			System.out.println("Invalid input!!");
+		switch (option = Integer.parseInt(sc1.nextLine())) {
+			case 1:
+				changeHotelName(sc1, hotels, viewHotelList(sc1, hotels));
+				break;
+			case 2:
+				addRooms(sc1, hotels, viewHotelList(sc1, hotels));
+				break;
+			case 3:
+				removeRooms(sc1, hotels, viewHotelList(sc1, hotels));
+				break;
+			case 4:
+				updateRoomPrice(sc1, hotels, viewHotelList(sc1, hotels));
+				break;
+			case 5:
+				removeReservation(sc1, hotels, viewHotelList(sc1, hotels));
+				break;
+			case 6:
+				removeHotel(hotels, viewHotelList(sc1, hotels));
+				break;
+			case 7:
+				editDPM(hotels, viewHotelList(sc1, hotels), sc1);
+				break;
+			case 8:
+				System.out.println("Exiting");
+				break;
+			default:
+				System.err.println("Input out of bounds");
+				break;
 		}
 	}
 

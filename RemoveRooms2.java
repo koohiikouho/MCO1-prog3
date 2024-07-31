@@ -9,15 +9,17 @@ package hotelgui;
  * @author EroZero
  */
 public class RemoveRooms2 extends javax.swing.JFrame {
-	private static HRSYS mainClass;
+	static HRSYS mainClass;
     /**
      * Creates new form NewJFrame
      */
-    public RemoveRooms2(HRSYS modelClass) {
+    public RemoveRooms2(HRSYS modelClass, int hotelNum) {
     	mainClass = modelClass;
-        initComponents();
+    	initComponents(hotelNum);
+        for(int i = 0; i < mainClass.getHotel().get(hotelNum).rooms.size(); ++i)
+        	jTextArea1.append("[" + (i + 1) + "]" + "\t" + mainClass.getHotel().get(hotelNum).rooms.get(i).getRoomFloor() + " - " + mainClass.getHotel().get(hotelNum).rooms.get(i).getRoomNumber() + "\n" );
+        
     }
-
 
 	/**
      * This method is called from within the constructor to initialize the form.
@@ -26,7 +28,7 @@ public class RemoveRooms2 extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(int hotelNum) {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -50,8 +52,6 @@ public class RemoveRooms2 extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-
-        jTextField1.setText("Floor");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -64,11 +64,9 @@ public class RemoveRooms2 extends javax.swing.JFrame {
         jButton9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                jButton9ActionPerformed(evt , hotelNum);
             }
         });
-
-        jTextField2.setText("Room Number");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -160,10 +158,25 @@ public class RemoveRooms2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt, int hotelInd) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        
-        
+    	int pass = 0;
+    	Integer floor = Integer.parseInt(jTextField1.getText());
+    	Integer room = Integer.parseInt(jTextField2.getText());
+    	for(int i = 0; i < this.mainClass.getHotel().get(hotelInd).rooms.size(); ++i)
+    	{
+    		if(this.mainClass.getHotel().get(hotelInd).rooms.get(i).getRoomFloor() == floor)
+    		{
+    			if(this.mainClass.getHotel().get(hotelInd).rooms.get(i).getRoomNumber() == room)
+    			{
+    				pass = 1;
+	    			this.mainClass.getHotel().get(hotelInd).rooms.remove(i);
+	    	    	MenuGUI menu = new MenuGUI(mainClass);
+	    	        menu.show();
+	    	        dispose();
+    			}
+    		}
+    	}
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -455,7 +468,7 @@ public class RemoveRooms2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RemoveRooms2(mainClass).setVisible(true);
+                new RemoveRooms2().setVisible(true);
             }
         });
     }

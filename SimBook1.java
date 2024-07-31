@@ -9,7 +9,6 @@ package hotelgui;
  * @author EroZero
  */
 public class SimBook1 extends javax.swing.JFrame {
-    
     static HRSYS mainClass;
     /**
      * Creates new form NewJFrame
@@ -146,7 +145,7 @@ public class SimBook1 extends javax.swing.JFrame {
         Integer hotelNumber = Integer.parseInt(hotelNum.getText());
         
         Hotel hotel = mainClass.getHotel().get(hotelNumber - 1);
-        SimBook2 daSims = new SimBook2(mainClass);
+        SimBook3 daSims = new SimBook3(mainClass, hotelNumber - 1);
         daSims.setHotel(hotel);
         daSims.show();
         

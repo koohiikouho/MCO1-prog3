@@ -3,18 +3,58 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hotelgui;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.awt.event.ActionEvent;
 
 /**
  *
  * @author EroZero
  */
 public class SimBook4 extends javax.swing.JFrame {
-
+	 static HRSYS mainClass;
     /**
      * Creates new form NewJFrame
      */
-    public SimBook4() {
-        initComponents();
+    public SimBook4(HRSYS mainClass, int hotelInd, int roomNum) {
+    	this.mainClass = mainClass;
+        initComponents(hotelInd);
+        
+        int year2, month2, day2;
+        long o;
+        String description = "";
+      	
+      	year2 = this.mainClass.getHotel().get(hotelInd).getReservations().getLast().getCheckInDate().getYear();
+      	month2 = this.mainClass.getHotel().get(hotelInd).getReservations().getLast().getCheckInDate().getMonth();
+      	day2 = this.mainClass.getHotel().get(hotelInd).getReservations().getLast().getCheckInDate().getDate();
+      	
+      	Date checkInTemp = new Date(year2, month2, day2);
+		
+		year2 = this.mainClass.getHotel().get(hotelInd).getReservations().getLast().getCheckOutDate().getYear();
+      	month2 = this.mainClass.getHotel().get(hotelInd).getReservations().getLast().getCheckOutDate().getMonth();
+      	day2 = this.mainClass.getHotel().get(hotelInd).getReservations().getLast().getCheckOutDate().getDate();
+      	
+      	Date checkOutTemp = new Date(year2, month2, day2);
+        
+      	long nights = (checkOutTemp.getTime() - checkInTemp.getTime()) / 86400000;
+      	int a = checkInTemp.getDate();
+      	
+        for(o = 0; o < nights; ++o)
+		{
+			BigDecimal multiply = new BigDecimal(this.mainClass.getHotel().get(hotelInd).getDPM()[a - 1] / 100.000);
+			BigDecimal amount = this.mainClass.getHotel().get(hotelInd).rooms.get(roomNum).getBasePrice();
+			amount = amount.multiply(multiply);
+			System.out.println(amount);
+			this.mainClass.getHotel().get(hotelInd).getReservations().getLast().getTransaction().add(new Transaction(amount, description));
+			a++;
+		}
     }
 
     /**
@@ -24,13 +64,15 @@ public class SimBook4 extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(int hotelInd) {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
+        btnEnterDiscount = new javax.swing.JButton();
+        btnConcludePayment = new javax.swing.JButton();
+        
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,67 +85,265 @@ public class SimBook4 extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
+        jTextArea1 = new javax.swing.JTextArea();
+        
+                jTextArea1.setEditable(false);
+                jTextArea1.setColumns(20);
+                jTextArea1.setRows(5);
+        
+        lblEnterDiscountCode = new JLabel();
+        lblEnterDiscountCode.setText("Enter Discount Code:");
+        
+        textField = new JTextField();
+        textField.setColumns(10);
+        
+        btnEnterDiscount.setText("Enter Discount");
+        btnEnterDiscount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnEnterDiscount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	btnEnterDiscountActionPerformed(evt, hotelInd);
+            }
+        });
+        
+        
+        btnConcludePayment.setText("Conclude payment?");
+        btnEnterDiscount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnEnterDiscount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	btnConcludePaymentActionPerformed(evt, hotelInd);
+            }
+        });
+        
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
-                        .addGap(215, 215, 215))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51))))
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addGap(27)
+        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(jPanel1Layout.createSequentialGroup()
+        							.addComponent(btnConcludePayment, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED))
+        						.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        							.addGroup(jPanel1Layout.createSequentialGroup()
+        								.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
+        									.addGroup(jPanel1Layout.createSequentialGroup()
+        										.addComponent(lblEnterDiscountCode, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE)
+        										.addGap(91))
+        									.addGroup(jPanel1Layout.createSequentialGroup()
+        										.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING, false)
+        											.addComponent(textField, Alignment.LEADING)
+        											.addComponent(btnEnterDiscount, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
+        										.addGap(59)))
+        								.addGap(6))
+        							.addGroup(jPanel1Layout.createSequentialGroup()
+        								.addComponent(jButton6, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE)
+        								.addPreferredGap(ComponentPlacement.RELATED))))
+        					.addComponent(jTextArea1, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
+        					.addGap(399)
+        					.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addGap(102)
+        					.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 382, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(67, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+        	jPanel1Layout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addGap(68)
+        			.addComponent(jLabel1)
+        			.addGap(18)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        					.addComponent(lblEnterDiscountCode)
+        					.addGap(7)
+        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        						.addGroup(jPanel1Layout.createSequentialGroup()
+        							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        							.addGap(14)
+        							.addComponent(btnEnterDiscount, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+        							.addComponent(btnConcludePayment, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(jButton6, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+        							.addGap(3))
+        						.addComponent(jTextArea1, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE))
+        					.addGap(55))
+        				.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 277, GroupLayout.PREFERRED_SIZE))
+        			.addGap(386))
         );
+        jPanel1.setLayout(jPanel1Layout);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(239, 239, 239)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(131)
+        			.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 588, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(335, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 458, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(377, Short.MAX_VALUE))
         );
+        getContentPane().setLayout(layout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        MenuGUI menu = new MenuGUI();
+        MenuGUI menu = new MenuGUI(mainClass);
         menu.show();
 
         dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
-
+    
+    private void btnEnterDiscountActionPerformed(java.awt.event.ActionEvent evt, int hotelNum) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+      	String discount = textField.getText();
+      	String tempDescript;
+      	int year2, month2, day2;
+      	
+      	year2 = this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getCheckInDate().getYear();
+      	month2 = this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getCheckInDate().getMonth();
+      	day2 = this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getCheckInDate().getDate();
+      	
+      	Date checkInTemp = new Date(year2, month2, day2);
+		
+		year2 = this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getCheckOutDate().getYear();
+      	month2 = this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getCheckOutDate().getMonth();
+      	day2 = this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getCheckOutDate().getDate();
+      	
+      	Date checkOutTemp = new Date(year2, month2, day2);
+		
+		long o;
+		long nights = (checkOutTemp.getTime() - checkInTemp.getTime()) / 86400000;
+		int a = checkInTemp.getDate();
+		int pass = 0;
+      	
+      	if(discount.compareTo("I_WORK_HERE") == 0)
+		{
+    		if(this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().getFirst().getDescription().contains("discount1") == false)
+    		{
+    			BigDecimal multi = new BigDecimal(0.90);
+        		for(int i = 0; i < this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().size(); ++i)
+        		{
+        			this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().get(i).setAmount(this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().get(i).getAmount().multiply(multi));
+        			tempDescript = this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().get(i).getDescription();
+        			this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().get(i).setDescription(tempDescript.concat("discount1 "));
+        		}
+    		}
+    		else
+			{
+    			System.out.println("Discount already applied");
+			}
+		}
+		else if(discount.compareTo("STAY4_GET1") == 0)
+		{
+			if(this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().getFirst().getDescription().contains("discount2") == false)
+    		{
+				if(this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().size() >= 5)
+				{
+					BigDecimal multi = new BigDecimal(0);
+					this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().getFirst().setAmount(multi);
+					for(int i = 0; i < this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().size(); ++i)
+            		{
+            			tempDescript = this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().get(i).getDescription();
+            			this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().get(i).setDescription(tempDescript.concat("discount2 "));
+            		}
+				}
+				else
+				{
+					System.out.println("Sorry you are not eligible for this discount");
+				}
+    		}
+			else
+			{
+				System.out.println("Discount already applied");
+			}
+		}
+		else if(discount.compareTo("PAYDAY") == 0)
+		{
+			if(this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().getFirst().getDescription().contains("discount3") == false)
+    		{
+				Date in15 = new Date(checkInTemp.getYear(), checkInTemp.getMonth(), 15);
+				Date in30 = new Date(checkInTemp.getYear(), checkInTemp.getMonth(), 30);
+				Date out15 = new Date(checkOutTemp.getYear(), checkOutTemp.getMonth(), 15);
+				Date out30 = new Date(checkOutTemp.getYear(), checkOutTemp.getMonth(), 30);
+				
+				if(checkInTemp.getTime() < in15.getTime())
+				{
+					if(checkOutTemp.getTime() >= in15.getTime())
+						pass = 1;
+				}
+				else if (checkInTemp.getTime() == in15.getTime() || checkInTemp.getTime() == in30.getTime() || checkInTemp.getTime() == out15.getTime() || checkInTemp.getTime() == out30.getTime())
+				{
+					pass = 1;
+				}
+				else if (checkOutTemp.getTime() == out15.getTime() || checkOutTemp.getTime() == out30.getTime() || checkOutTemp.getTime() == in15.getTime() || checkOutTemp.getTime() == in30.getTime())
+				{
+					pass = 1;
+				}
+				else if(checkInTemp.getTime() < in30.getTime())
+				{
+					if(checkOutTemp.getTime() >= in30.getTime())
+						pass = 1;
+				}
+				
+				if(pass == 1)
+				{
+					BigDecimal multi = new BigDecimal(0.93);
+            		for(int i = 0; i < this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().size(); ++i)
+            		{
+            			this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().get(i).setAmount(this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().get(i).getAmount().multiply(multi));
+            			tempDescript = this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().get(i).getDescription();
+            			this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().get(i).setDescription(tempDescript.concat("discount3 "));
+            		}
+				}
+				else
+				{
+					System.out.println("Sorry you are not eligible for this discount");
+				}
+    		}
+			else
+			{
+				System.out.println("Discount already applied");
+			}
+		}
+    }//GEN-LAST:event_jButton6ActionPerformed
+    
+    private void btnConcludePaymentActionPerformed(java.awt.event.ActionEvent evt, int hotelNum) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    	
+    	 BigDecimal ben = new BigDecimal(0.00);
+    	 jTextArea1.append( "*************************************************************************" + "\n");
+    	 for(int i = 0; i < mainClass.getHotel().size(); ++i)
+    	 {
+    		 ben = this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().get(i).getAmount();
+    		 ben = ben.setScale(2, BigDecimal.ROUND_HALF_UP);
+    		 
+    		 jTextArea1.append(ben + "\n");
+    	 }
+    	 
+    	 BigDecimal amount = new BigDecimal(0.00);
+		 for(int i = 0; i < this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().size(); ++i)
+ 		 {
+ 			amount = amount.add(this.mainClass.getHotel().get(hotelNum).getReservations().getLast().getTransaction().get(i).getAmount());
+ 		 }
+		 
+		 amount = amount.setScale(2, BigDecimal.ROUND_HALF_UP);
+		 
+		 jTextArea1.append("Amount to be paid by customer: " + amount  + "\n");
+		 jTextArea1.append( "*************************************************************************" + "\n");
+    	 
+    }//GEN-LAST:event_jButton6ActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -1163,10 +1403,14 @@ public class SimBook4 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+//    private javax.swing.JButton btnEnterDiscount;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton btnConcludePayment;
+    private javax.swing.JButton btnEnterDiscount;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    // End of variables declaration//GEN-END:variables
+    private JLabel lblEnterDiscountCode;
+    private JTextField textField;
 }

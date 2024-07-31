@@ -9,8 +9,7 @@ package hotelgui;
  * @author EroZero
  */
 public class RemoveRoom extends javax.swing.JFrame {
-	private static HRSYS mainClass;
-	private int hotelNum, roomNum, floorNum;
+	static HRSYS mainClass;
 	/**
      * Creates new form NewJFrame
      */
@@ -143,11 +142,11 @@ public class RemoveRoom extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-    	Integer hotelInd = Integer.parseInt(jTextField3.getText());
+    	Integer hotelInd = Integer.parseInt(jTextField3.getText()) - 1;
+    	System.out.println(hotelInd);
+//    	this.mainClass.getHotel().get(hotelInd).;
     	
-    	this.mainClass.getHotel().get(hotelNum);
-    	
-        RemoveRooms2 rmvrm = new RemoveRooms2(mainClass);
+        RemoveRooms2 rmvrm = new RemoveRooms2(mainClass, hotelInd);
         rmvrm.show();
         dispose();
         

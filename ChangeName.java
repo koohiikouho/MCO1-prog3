@@ -9,7 +9,7 @@ package hotelgui;
  * @author EroZero
  */
 public class ChangeName extends javax.swing.JFrame {
-    private static HRSYS mainClass;
+    static HRSYS mainClass;
     /**
      * Creates new form NewJFrame
      */
